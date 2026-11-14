@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://penti.cz/sitemap-index.xml

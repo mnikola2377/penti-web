@@ -1,0 +1,67 @@
+---
+import { company } from "../lib/company";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-gold"></div>
+  <div class="wrap footer-grid">
+    <div>
+      <img class="footer-logo" src="/brand/penti-logo-vodorovne-barevne-negativ.svg" width="597" height="114" alt="PENTI PREFAB" />
+      <p>
+        {company.name}<br />
+        {company.street}<br />
+        {company.postal} {company.city}<br />
+        IČ {company.ico} · DIČ {company.dic}
+      </p>
+      <p>
+        <a href={`tel:${company.phoneTel}`}>{company.phoneDisplay}</a><br />
+        <a href={`mailto:${company.email}`}>{company.email}</a><br />
+        Poptávky: <a href={`mailto:${company.inquiries}`}>{company.inquiries}</a>
+      </p>
+    </div>
+    <div>
+      <h2>Střechy</h2>
+      <ul>
+        <li><a href="/strechy/vazniky">Příhradové vazníky</a></li>
+        <li><a href="/strechy/krovy">Klasické krovy</a></li>
+        <li><a href="/strechy/pokryvacstvi">Pokrývačství</a></li>
+        <li><a href="/strechy/klempirstvi">Klempířství</a></li>
+        <li><a href="/strechy/kompletni-strecha">Kompletní střecha</a></li>
+        <li><a href="/poptavka/strecha">Poptávka střechy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Dřevostavby a firma</h2>
+      <ul>
+        <li><a href="/drevostavby">Dřevostavby</a></li>
+        <li><a href="/drevostavby/typove-domy">Typové domy</a></li>
+        <li><a href="/poptavka/dum">Poptávka domu</a></li>
+        <li><a href="/material">Materiál</a></li>
+        <li><a href="/realizace">Realizace</a></li>
+        <li><a href="/recenze">Recenze</a></li>
+        <li><a href="/poradna">Poradna</a></li>
+        <li><a href="/o-nas">O nás</a></li>
+        <li><a href="/vyroba">Výroba</a></li>
+        <li><a href="/technologie">Technologie</a></li>
+        <li><a href="/kariera">Kariéra</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Právní</h2>
+      <ul>
+        <li><a href="/ochrana-udaju">Ochrana osobních údajů</a></li>
+        <li><a href="/cookies">Cookies</a></li>
+        <li><a href="/obchodni-podminky">Obchodní podmínky</a></li>
+        <li><a href={company.instagram}>Instagram PENTI PREFAB</a></li>
+        <li><a href={company.facebook}>Facebook PENTI PREFAB</a></li>
+        <li><a href={company.reservio}>Nezávazná schůzka přes Reservio</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-meta">
+    <span>© {year} {company.name}</span>
+    <span>{company.court}</span>
+  </div>
+</footer>

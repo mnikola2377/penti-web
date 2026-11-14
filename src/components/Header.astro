@@ -1,0 +1,55 @@
+---
+import { company, nav } from "../lib/company";
+const current = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="/" aria-label="PENTI PREFAB, úvod">
+      <img class="logo" src="/brand/penti-logo-vodorovne-barevne.svg" width="597" height="114" alt="PENTI PREFAB" />
+    </a>
+    <a class="header-phone" href={`tel:${company.phoneTel}`}>
+      <span class="phone-full">{company.phoneDisplay}</span>
+      <span class="phone-short">777 805 784</span>
+    </a>
+    <button class="btn btn-secondary nav-toggle" type="button" id="menu-btn" aria-expanded="false" aria-controls="hlavni-nav">
+      Menu
+    </button>
+    <div class="nav-panel" id="hlavni-nav">
+      <nav aria-label="Hlavní">
+        <ul class="nav-links">
+          {
+            nav.map((item) => (
+              <li class="nav-item">
+                <a href={item.href} aria-current={current === item.href ? "page" : undefined}>
+                  {item.label}
+                </a>
+                {"children" in item && item.children ? (
+                  <ul class="submenu">
+                    {item.children.map((child) => (
+                      <li>
+                        <a href={child.href} aria-current={current === child.href ? "page" : undefined}>
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <a class="btn btn-primary" href="/poptavka/strecha">Spočítat střechu</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>("#menu-btn");
+  const panel = document.querySelector<HTMLElement>("#hlavni-nav");
+  button?.addEventListener("click", () => {
+    const open = panel?.classList.toggle("is-open");
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+</script>

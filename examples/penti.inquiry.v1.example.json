@@ -1,0 +1,99 @@
+{
+  "schema_version": "penti.inquiry.v1",
+  "inquiry_id": "8f2c1a0e-4b3d-4c1a-9e77-0c0d1b2a3e4f",
+  "draft_id": "11111111-2222-4333-8444-555555555555",
+  "created_at": "2026-11-10T21:00:00+01:00",
+  "locale": "cs-CZ",
+  "channel": "web",
+  "quality_score": 100,
+  "utm": null,
+  "intent": {
+    "category": "strecha",
+    "job": "rekonstrukce",
+    "services": [
+      "konstrukce",
+      "pokryvacstvi",
+      "klempirstvi"
+    ],
+    "structure": "krov",
+    "keep_existing_structure": false,
+    "timber": "susene_hoblovane",
+    "truss_spacing_mm": 900,
+    "knee_wall": false
+  },
+  "site": {
+    "address": {
+      "line": "Ukázková 12",
+      "municipality": "Vyškov",
+      "postal_code": "68201",
+      "parcel": null,
+      "country": "CZ"
+    },
+    "ruian_building_code": null,
+    "snow_region": "II",
+    "wind_region": "II",
+    "snow_load_kpa": null,
+    "distance_to_plant_km": null
+  },
+  "roof": {
+    "shape": "sedlova",
+    "plan_shape": "obdelnik",
+    "width_m": 9.6,
+    "length_m": 12.4,
+    "pitch_deg": 40,
+    "pitch_upper_deg": null,
+    "break_from_wall_m": null,
+    "eave_overhang_m": 0.6,
+    "gable_overhang_m": 0.3,
+    "dormers_count": 0,
+    "attic_use": "obytne",
+    "insulation_interest": "ano",
+    "covering": {
+      "material": "betonova_taska",
+      "finish": "engoba",
+      "color": "antracit"
+    },
+    "gutters": {
+      "material": "pozink_lak",
+      "color": "antracit"
+    },
+    "sheathing": "latovani",
+    "roof_windows_count": 2,
+    "snow_guards": true,
+    "safety_points": false
+  },
+  "estimate": {
+    "kind": "orientacni_vykaz",
+    "area_m2": 183.3,
+    "ridge_m": 13,
+    "eave_m": 26,
+    "verge_m": 28.2,
+    "hip_m": 0,
+    "span_m": 9.6,
+    "developed_width_m": 14.1,
+    "currency": "CZK",
+    "range_from_czk": null,
+    "range_to_czk": null,
+    "manual_quote": false,
+    "disclaimer": "Nejde o závaznou nabídku. Jde o orientační výkaz plochy a délek, ne o cenu."
+  },
+  "wanted_start_month": "2027-04",
+  "note": "Ukázková poptávka pro ověření schématu. Jména a adresa jsou smyšlené.",
+  "contact": {
+    "name": "Jan Novák",
+    "email": "jan@example.cz",
+    "phone": "+420777000000",
+    "role": "stavebnik",
+    "gdpr_consent_at": "2026-11-10T21:05:00+01:00"
+  },
+  "attachments": [
+    {
+      "id": "att_01",
+      "type": "foto",
+      "filename": "strecha-jih.jpg",
+      "bytes": 2450000,
+      "sha256": null,
+      "url": "https://storage.example/att_01"
+    }
+  ]
+}
