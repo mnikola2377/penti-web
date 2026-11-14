@@ -1,0 +1,23 @@
+---
+import Base from "../../layouts/Base.astro";
+import KartaRealizace from "../../components/KartaRealizace.astro";
+import { realizace } from "../../data/foto";
+
+const description =
+  "Realizace PENTI PREFAB: příhradové vazníky, klasické krovy, pergola, pokrývačství a klempířství. Obec a rozměr u fotek doplní firma.";
+---
+
+<Base title="Realizace" description={description} path="/realizace">
+  <article class="wrap page-hero">
+    <p class="crumbs"><a href="/">Domů</a> / Realizace</p>
+    <p class="eyebrow">Realizace</p>
+    <h1>Práce podle fotek, které máme</h1>
+    <p class="lead">
+      Karty jsou pojmenované podle typu práce a roku z podkladů. Obec a rozměr u nich záměrně chybí. Až je doplníte, zapíšou se do připravených polí.
+    </p>
+    <p class="notice">Neuvádíme vymyšlené obce, metry ani jména zákazníků.</p>
+    <div class="refs">
+      {realizace.map((item) => <KartaRealizace item={item} />)}
+    </div>
+  </article>
+</Base>

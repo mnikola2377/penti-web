@@ -111,7 +111,6 @@ export const pages: SitePage[] = [
     eyebrow: "Pokrývačství",
     heading: "Pokrývačské práce",
     lead: "Krytinu pokládáme na konstrukce, které sami vyrobíme, i na střechy, kde konstrukce už stojí. Konkrétní skladbu a cenu určíme až z podkladů.",
-    notice: "Fotografie pokrývačských realizací zatím nemáme v novém webu. Doplní je firma.",
     serviceName: "Pokrývačské práce",
     sections: [
       {
@@ -140,7 +139,6 @@ export const pages: SitePage[] = [
     eyebrow: "Klempířství",
     heading: "Klempířské práce",
     lead: "Oplechování navazuje na krov a na krytinu. Můžete ho poptat samostatně, nebo jako součást kompletní střechy.",
-    notice: "Ukázky klempířských detailů doplníme z vlastních staveb. Do té doby berte stránku jako popis rozsahu prací, ne jako galerii.",
     serviceName: "Klempířské práce",
     sections: [
       {
@@ -287,40 +285,6 @@ export const pages: SitePage[] = [
     cta: { href: "/poptavka/dum", label: "Nechat vzkaz k domu" },
   },
   {
-    path: "realizace",
-    title: "Realizace",
-    description: "Realizace střech a konstrukcí PENTI PREFAB. Konkrétní zakázky s místem a rozměrem doplníme, až budou fotografie a souhlas.",
-    eyebrow: "Realizace",
-    heading: "Naše práce, až budeme mít podklady",
-    lead: "Každá zakázka dostane vlastní stránku: obec, typ konstrukce a co přesně jsme udělali. Teď tu karty jen ukazují strukturu.",
-    notice: "Nejsou tu vymyšlené stavby, metry ani ceny. Fotografie a údaje dodá firma.",
-    sections: [
-      {
-        heading: "Jak bude karta vypadat",
-        paragraphs: [
-          "Například: „Ve Vlasaticích jsme postavili celé 2. podlaží ze dřeva: strop, krov i štíty.“ Takový text chce manuál značky. Stejnou větu použijeme, až k ní budeme mít fotografii a ověřené číslo.",
-        ],
-      },
-    ],
-    cta: { href: "/realizace/doplnime", label: "Otevřít ukázkovou kartu" },
-  },
-  {
-    path: "realizace/doplnime",
-    title: "Ukázka karty realizace",
-    description: "Vzor stránky jedné realizace PENTI. Místo, rozsah a fotografie budou doplněny.",
-    eyebrow: "Realizace · obec",
-    heading: "Sem přijde název zakázky",
-    lead: "Adresa stránky bude ve tvaru obec a typ konstrukce, aby šla najít i podle místa. Tahle adresa je jen vzor.",
-    notice: "Ukázková karta. Není to dokončená stavba.",
-    sections: [
-      {
-        heading: "Co na stránce bude",
-        bullets: ["Obec a rok.", "Typ konstrukce: vazník, krov, panely, krytina nebo klempíř.", "Rozpětí nebo plocha, až je změříme.", "Fotografie dřeva nebo hotové střechy, bez cizích log a bez SPZ."],
-      },
-    ],
-    cta: { href: "/poptavka/strecha", label: "Spočítat podobnou střechu" },
-  },
-  {
     path: "recenze",
     title: "Recenze",
     description: "Hodnocení zákazníků PENTI PREFAB zveřejníme jen s odkazem na zdroj. Vymyšlené citace na web nedáváme.",
@@ -428,33 +392,6 @@ export const pages: SitePage[] = [
       },
     ],
     cta: { href: "/poptavka/strecha", label: "Otevřít konfigurátor" },
-  },
-  {
-    path: "o-nas",
-    title: "O nás",
-    description: "PENTI PREFAB s. r. o. navrhuje a dodává dřevěné střešní konstrukce z Ivanovic na Hané od roku 1992.",
-    eyebrow: "O nás",
-    heading: "Dřevěné konstrukce od roku 1992",
-    lead: "Sídlíme v Ivanovicích na Hané. Navrhujeme a dodáváme dřevěné střešní konstrukce a k nim nově i pokrývačské a klempířské práce.",
-    sections: [
-      {
-        heading: "Jak pracujeme",
-        paragraphs: [
-          "Používáme prověřené materiály a skladby. Levné výrobky do střechy nezabudováváme, protože z dlouhodobého hlediska vyjdou nejdráž. To je věta z našeho stávajícího webu a držíme se jí.",
-          "Když chcete nabídku na střešní konstrukci, pošlete projekt a popište, co potřebujete. Když projekt není, stačí náčrt. Připravíme předběžný rozpočet, sejdeme se, stavbu zaměříme a po záloze zahájíme výrobu.",
-        ],
-      },
-      {
-        heading: "Lidé",
-        bullets: [
-          "Mgr. Michal Nikola, obchodní ředitel a majitel.",
-          "Ing. Pavel Přikryl, obchod a cenové nabídky.",
-          "René Menšík, vedoucí výroby a montáží.",
-          "Ing. Ondřej Čuma, hlavní projektant.",
-        ],
-      },
-    ],
-    cta: { href: "/kontakt", label: "Kontakt" },
   },
   {
     path: "vyroba",
