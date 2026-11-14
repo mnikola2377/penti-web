@@ -1,6 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
+import Foto from "../components/Foto.astro";
+import KartaRealizace from "../components/KartaRealizace.astro";
 import { company } from "../lib/company";
+import { hero, realizace, sluzby } from "../data/foto";
 
 const description =
   "PENTI PREFAB z Ivanovic na Hané vyrábí krovy a vazníky od roku 1992 a nově dělá i pokrývačské a klempířské práce a dřevostavby. Spočítejte si střechu.";
@@ -33,23 +36,15 @@ const description =
         </div>
       </div>
       <figure class="hero-figure">
-        <svg viewBox="0 0 640 420" role="img" aria-labelledby="hero-title">
-          <title id="hero-title">Schéma sedlové střechy z dřevěných vazníků</title>
-          <rect x="40" y="250" width="560" height="16" fill="#1B251E" />
-          <polygon points="70,250 320,78 570,250" fill="none" stroke="#1B251E" stroke-width="8" />
-          <line x1="320" y1="78" x2="320" y2="250" stroke="#BF935B" stroke-width="4" />
-          <g stroke="#1B251E" stroke-width="3" fill="none">
-            <line x1="120" y1="250" x2="320" y2="120" />
-            <line x1="180" y1="250" x2="320" y2="150" />
-            <line x1="520" y1="250" x2="320" y2="120" />
-            <line x1="460" y1="250" x2="320" y2="150" />
-          </g>
-          <g fill="#46704A">
-            <rect x="96" y="266" width="28" height="90" />
-            <rect x="516" y="266" width="28" height="90" />
-          </g>
-        </svg>
-        <figcaption>Schéma sedlové střechy. Fotografii realizace doplníme.</figcaption>
+        <Foto
+          src={hero.src}
+          alt={hero.alt}
+          sizes="(min-width: 980px) 520px, 100vw"
+          widths={[640, 960, 1280]}
+          priority
+          class="hero-photo"
+        />
+        <figcaption>Klasický krov, 2008–2023. Obec a rozměr doplníme.</figcaption>
       </figure>
     </div>
   </section>
@@ -59,25 +54,37 @@ const description =
       <p class="eyebrow">Co děláme</p>
       <h2 id="sluzby">Čtyři cesty, jak u nás začít</h2>
       <div class="pillars">
-        <a class="card" href="/strechy/vazniky">
-          <h3>Krovy a konstrukce</h3>
-          <p>Příhradové vazníky do rozpětí 30 m bez vnitřní podpory a klasické krovy včetně pohledového dřeva.</p>
-          <span class="more">Vazníky a krovy</span>
+        <a class="card card-media" href="/strechy/krovy">
+          <Foto src={sluzby.konstrukce.src} alt={sluzby.konstrukce.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
+          <div class="card-body">
+            <h3>Krovy a konstrukce</h3>
+            <p>Příhradové vazníky do rozpětí 30 m bez vnitřní podpory a klasické krovy včetně pohledového dřeva.</p>
+            <span class="more">Vazníky a krovy</span>
+          </div>
         </a>
-        <a class="card" href="/strechy/pokryvacstvi">
-          <h3>Pokrývačství</h3>
-          <p>Latění nebo bednění, pojistná hydroizolace a pokládka krytiny na naši i na hotovou konstrukci.</p>
-          <span class="more">Pokrývačské práce</span>
+        <a class="card card-media" href="/strechy/pokryvacstvi">
+          <Foto src={sluzby.pokryvacstvi.src} alt={sluzby.pokryvacstvi.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
+          <div class="card-body">
+            <h3>Pokrývačství</h3>
+            <p>Latění nebo bednění, pojistná hydroizolace a pokládka krytiny. Na snímku bobrovka z roku 2007.</p>
+            <span class="more">Pokrývačské práce</span>
+          </div>
         </a>
-        <a class="card" href="/strechy/klempirstvi">
-          <h3>Klempířství</h3>
-          <p>Okapy, svody, lemování a úžlabí. Samostatně, nebo jako součást celé střechy.</p>
-          <span class="more">Klempířské práce</span>
+        <a class="card card-media" href="/strechy/klempirstvi">
+          <Foto src={sluzby.klempirstvi.src} alt={sluzby.klempirstvi.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
+          <div class="card-body">
+            <h3>Klempířství</h3>
+            <p>Okapy, svody, lemování a úžlabí. Na snímku oplechování komínů z roku 2007.</p>
+            <span class="more">Klempířské práce</span>
+          </div>
         </a>
-        <a class="card" href="/drevostavby">
-          <h3>Typové dřevostavby</h3>
-          <p>Panely a hrubou stavbu už vyrábíme. Katalog typových domů teprve schvalujeme, ceny tu proto nejsou.</p>
-          <span class="more">Dřevostavby</span>
+        <a class="card card-media" href="/drevostavby">
+          <Foto src={sluzby.drevostavby.src} alt={sluzby.drevostavby.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
+          <div class="card-body">
+            <h3>Typové dřevostavby</h3>
+            <p>Panely a hrubou stavbu už vyrábíme. Katalog typových domů teprve schvalujeme, ceny tu proto nejsou.</p>
+            <span class="more">Dřevostavby</span>
+          </div>
         </a>
       </div>
     </div>
@@ -100,21 +107,10 @@ const description =
   <section class="section" aria-labelledby="reference">
     <div class="wrap">
       <p class="eyebrow">Realizace</p>
-      <h2 id="reference">Karty zakázek připravujeme</h2>
-      <p>Každá realizace bude mít obec, typ práce a rozměr. Než dorazí fotografie, jsou tu jen prázdné karty, ať je vidět struktura.</p>
+      <h2 id="reference">Vybrané zakázky</h2>
+      <p>Názvy jsou podle typu práce a roku z podkladů. Obec a rozměr u každé karty teprve doplníme, nevymýšlíme je.</p>
       <div class="refs">
-        {
-          ["Vazníky", "Krov", "Panely"].map((label) => (
-            <a class="card" href="/realizace/doplnime">
-              <div class="ref-media">
-                <img src="/brand/penti-znak-zlaty.svg" width="114" height="114" alt="" />
-                <span class="badge">Chybí fotografie</span>
-              </div>
-              <h3>{label}</h3>
-              <p>Místo a rozměr doplníme z podkladů firmy. Tohle není konkrétní stavba.</p>
-            </a>
-          ))
-        }
+        {realizace.filter((item) => item.featured).map((item) => <KartaRealizace item={item} />)}
       </div>
       <p style="margin-top:16px"><a href="/realizace">Všechny realizace</a></p>
     </div>
