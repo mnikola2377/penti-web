@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import SimpleForm from "../components/SimpleForm.astro";
+import { company } from "../lib/company";
+---
+
+<Base
+  title="Kariéra"
+  description="Práce v PENTI PREFAB v Ivanovicích na Hané. Konkrétní pozice teď není vypsaná. Ozvat se mohou tesaři, pokrývači, klempíři a montážníci."
+  path="/kariera"
+>
+  <article class="wrap page-hero">
+    <p class="eyebrow">Kariéra</p>
+    <h1>Řemeslo v Ivanovicích na Hané</h1>
+    <p class="lead">
+      Na stávajícím webu teď nemáme otevřenou konkrétní pozici. Když vás práce u nás zajímá, napište. Výroba je v hale na adrese {company.street}, {company.city}.
+    </p>
+    <p class="notice">Konkrétní inzerát doplníme, až ho budeme mít. Do té doby sbíráme jen jméno, telefon a řemeslo, bez životopisu.</p>
+    <h2>Koho rádi poznáme</h2>
+    <ul>
+      <li>Tesaře na montáže krovů a vazníků.</li>
+      <li>Pokrývače a klempíře na střechy, které nově děláme i my.</li>
+      <li>Montážníky a lidi do výroby v hale.</li>
+    </ul>
+    <SimpleForm kind="kariera" showTrade submitLabel="Poslat zájem" messageLabel="Krátká zpráva, stačí pár vět" />
+  </article>
+</Base>

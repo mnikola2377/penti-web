@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://penti.cz/schema/penti.inquiry.v1.schema.json",
+  "title": "penti.inquiry.v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version", "inquiry_id", "created_at", "locale", "channel", "intent", "site", "roof", "estimate", "contact", "attachments"],
+  "properties": {
+    "schema_version": { "const": "penti.inquiry.v1" },
+    "inquiry_id": { "type": "string", "format": "uuid" },
+    "draft_id": { "type": "string", "format": "uuid" },
+    "created_at": { "type": "string", "pattern": "[+-][0-9]{2}:[0-9]{2}$" },
+    "locale": { "const": "cs-CZ" },
+    "channel": { "const": "web" },
+    "quality_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "intent": {
+      "type": "object",
+      "required": ["category", "job", "services"],
+      "properties": {
+        "category": { "const": "strecha" },
+        "job": { "enum": ["novostavba", "rekonstrukce"] },
+        "services": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "enum": ["konstrukce", "pokryvacstvi", "klempirstvi", "kompletni_strecha", "material"] }
+        },
+        "structure": { "enum": ["vaznik", "krov", "hotova", null] }
+      }
+    },
+    "site": {
+      "type": "object",
+      "required": ["address"],
+      "properties": {
+        "address": {
+          "type": "object",
+          "required": ["line", "municipality", "postal_code", "country"],
+          "properties": {
+            "country": { "const": "CZ" },
+            "postal_code": { "type": "string", "pattern": "^[0-9]{5}$" }
+          }
+        },
+        "snow_load_kpa": { "type": ["number", "null"] },
+        "distance_to_plant_km": { "type": ["number", "null"] }
+      }
+    },
+    "estimate": {
+      "type": "object",
+      "required": ["kind", "currency", "range_from_czk", "range_to_czk", "disclaimer"],
+      "properties": {
+        "kind": { "const": "orientacni_vykaz" },
+        "currency": { "const": "CZK" },
+        "area_m2": { "type": ["number", "null"] },
+        "range_from_czk": { "type": "null" },
+        "range_to_czk": { "type": "null" },
+        "manual_quote": { "type": "boolean" },
+        "disclaimer": { "type": "string" }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": ["name", "email", "phone", "role", "gdpr_consent_at"],
+      "properties": {
+        "role": { "enum": ["stavebnik", "projektant", "firma"] }
+      }
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "filename", "bytes"],
+        "properties": {
+          "type": { "enum": ["foto", "vykres", "jiny"] },
+          "url": { "type": ["string", "null"] },
+          "sha256": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

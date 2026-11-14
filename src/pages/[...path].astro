@@ -1,0 +1,87 @@
+---
+import Base from "../layouts/Base.astro";
+import { getPage, pages } from "../data/pages";
+
+export function getStaticPaths() {
+  return pages.map((page) => ({ params: { path: page.path } }));
+}
+
+const page = getPage(Astro.params.path);
+if (!page) throw new Error("Stránka chybí");
+
+const crumbs = page.path.split("/").filter(Boolean);
+const jsonLd = page.serviceName
+  ? {
+      "@type": "Service",
+      name: page.title,
+      serviceType: page.serviceName,
+      description: page.description,
+      url: new URL(`/${page.path}`, Astro.site).href,
+      provider: { "@id": "https://penti.cz/#firma" },
+      areaServed: { "@type": "Country", name: "Česko" },
+    }
+  : {
+      "@type": "BreadcrumbList",
+      itemListElement: crumbs.map((part, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: part,
+        item: new URL(`/${crumbs.slice(0, index + 1).join("/")}`, Astro.site).href,
+      })),
+    };
+---
+
+<Base title={page.title} description={page.description} path={`/${page.path}`} jsonLd={jsonLd}>
+  <article class="wrap page-hero">
+    <p class="crumbs">
+      <a href="/">Domů</a>
+      {
+        crumbs.map((part, index) => (
+          <>
+            {" / "}
+            <a href={`/${crumbs.slice(0, index + 1).join("/")}`}>{index === crumbs.length - 1 ? page.title : part}</a>
+          </>
+        ))
+      }
+    </p>
+    <p class="eyebrow">{page.eyebrow}</p>
+    <h1>{page.heading}</h1>
+    <p class="lead">{page.lead}</p>
+    {page.notice && <p class="notice">{page.notice}</p>}
+    <div class="prose">
+      {
+        page.sections.map((section) => (
+          <section>
+            <h2>{section.heading}</h2>
+            {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+            {section.bullets && (
+              <ul>
+                {section.bullets.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+            {section.links && (
+              <ul>
+                {section.links.map((link) => (
+                  <li>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        ))
+      }
+    </div>
+    {
+      page.cta && (
+        <p>
+          <a class="btn btn-primary" href={page.cta.href}>
+            {page.cta.label}
+          </a>
+        </p>
+      )
+    }
+  </article>
+</Base>

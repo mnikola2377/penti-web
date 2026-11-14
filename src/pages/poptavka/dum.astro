@@ -1,0 +1,33 @@
+---
+import Base from "../../layouts/Base.astro";
+import SimpleForm from "../../components/SimpleForm.astro";
+---
+
+<Base
+  title="Poptávka typového domu"
+  description="Konfigurátor typové dřevostavby PENTI otevřeme až s katalogem domů. Zatím si u nás nechte kontakt, nebo pošlete vlastní projekt."
+  path="/poptavka/dum"
+>
+  <article class="wrap page-hero">
+    <p class="eyebrow">Poptávka domu</p>
+    <h1>Katalog domů ještě není otevřený</h1>
+    <p class="lead">
+      Tok typového domu spustíme, až budou schválené typy a rozsah dodávky. Do té doby tu není výběr domu ani orientační cena, protože bychom si je museli vymyslet.
+    </p>
+    <p class="notice">Tohle je zástupná stránka. Ostrý konfigurátor domu sem přijde později a použije stejný datový balíček jako střecha.</p>
+    <h2>Jak tok později půjde</h2>
+    <ol>
+      <li>Záměr: typový dům, dům na míru, nebo jen panely a střecha.</li>
+      <li>Výběr typu podle podlaží, plochy a počtu pokojů.</li>
+      <li>Pozemek: adresa, svažitost, příjezd jeřábu, sítě, stav povolení.</li>
+      <li>Úpravy v mezích řady: zrcadlení, střecha, úroveň dodávky.</li>
+      <li>Krytina a klempíř stejnými volbami jako u střechy.</li>
+      <li>Podklady a termín výroby.</li>
+      <li>Shrnutí, kontakt a souhlas.</li>
+    </ol>
+    <p>Panely a hrubou stavbu podle vašeho projektu umíme poptat už teď. Napište, co má dům umět, nebo rovnou zavolejte.</p>
+    <p><a class="btn btn-secondary" href="/drevostavby/panely-hruba-stavba">Panely a hrubá stavba</a></p>
+    <h2>Dejte mi vědět</h2>
+    <SimpleForm kind="kontakt" submitLabel="Poslat vzkaz" messageLabel="Co plánujete postavit" />
+  </article>
+</Base>

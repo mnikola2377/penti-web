@@ -1,0 +1,9 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "strict": true,
+    "types": []
+  },
+  "include": [".astro/types.d.ts", "src/**/*", "netlify/**/*", "test/**/*"],
+  "exclude": ["dist"]
+}

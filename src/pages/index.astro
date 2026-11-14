@@ -1,0 +1,151 @@
+---
+import Base from "../layouts/Base.astro";
+import { company } from "../lib/company";
+
+const description =
+  "PENTI PREFAB z Ivanovic na Hané vyrábí krovy a vazníky od roku 1992 a nově dělá i pokrývačské a klempířské práce a dřevostavby. Spočítejte si střechu.";
+---
+
+<Base
+  title="PENTI PREFAB | Krovy, střechy a dřevostavby"
+  description={description}
+  path="/"
+  jsonLd={{
+    "@type": "WebSite",
+    name: "PENTI PREFAB",
+    url: company.url,
+    inLanguage: "cs-CZ",
+    publisher: { "@id": "https://penti.cz/#firma" },
+  }}
+>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Ivanovice na Hané · od roku {company.since}</p>
+        <h1>Krovy a střechy, které jdou spočítat</h1>
+        <hr class="gold-line" />
+        <p class="lead">
+          Vyrábíme vazníky a klasické krovy a montujeme je. K tomu pokládáme krytinu, děláme klempířské práce a dodáváme panely dřevostaveb. Nabídku připravíme z údajů, které nám pošlete.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/poptavka/strecha">Spočítat střechu</a>
+          <a class="btn btn-secondary" href="/drevostavby/typove-domy">Vybrat typový dům</a>
+        </div>
+      </div>
+      <figure class="hero-figure">
+        <svg viewBox="0 0 640 420" role="img" aria-labelledby="hero-title">
+          <title id="hero-title">Schéma sedlové střechy z dřevěných vazníků</title>
+          <rect x="40" y="250" width="560" height="16" fill="#1B251E" />
+          <polygon points="70,250 320,78 570,250" fill="none" stroke="#1B251E" stroke-width="8" />
+          <line x1="320" y1="78" x2="320" y2="250" stroke="#BF935B" stroke-width="4" />
+          <g stroke="#1B251E" stroke-width="3" fill="none">
+            <line x1="120" y1="250" x2="320" y2="120" />
+            <line x1="180" y1="250" x2="320" y2="150" />
+            <line x1="520" y1="250" x2="320" y2="120" />
+            <line x1="460" y1="250" x2="320" y2="150" />
+          </g>
+          <g fill="#46704A">
+            <rect x="96" y="266" width="28" height="90" />
+            <rect x="516" y="266" width="28" height="90" />
+          </g>
+        </svg>
+        <figcaption>Schéma sedlové střechy. Fotografii realizace doplníme.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="sluzby">
+    <div class="wrap">
+      <p class="eyebrow">Co děláme</p>
+      <h2 id="sluzby">Čtyři cesty, jak u nás začít</h2>
+      <div class="pillars">
+        <a class="card" href="/strechy/vazniky">
+          <h3>Krovy a konstrukce</h3>
+          <p>Příhradové vazníky do rozpětí 30 m bez vnitřní podpory a klasické krovy včetně pohledového dřeva.</p>
+          <span class="more">Vazníky a krovy</span>
+        </a>
+        <a class="card" href="/strechy/pokryvacstvi">
+          <h3>Pokrývačství</h3>
+          <p>Latění nebo bednění, pojistná hydroizolace a pokládka krytiny na naši i na hotovou konstrukci.</p>
+          <span class="more">Pokrývačské práce</span>
+        </a>
+        <a class="card" href="/strechy/klempirstvi">
+          <h3>Klempířství</h3>
+          <p>Okapy, svody, lemování a úžlabí. Samostatně, nebo jako součást celé střechy.</p>
+          <span class="more">Klempířské práce</span>
+        </a>
+        <a class="card" href="/drevostavby">
+          <h3>Typové dřevostavby</h3>
+          <p>Panely a hrubou stavbu už vyrábíme. Katalog typových domů teprve schvalujeme, ceny tu proto nejsou.</p>
+          <span class="more">Dřevostavby</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="postup">
+    <div class="wrap">
+      <p class="eyebrow">Postup</p>
+      <h2 id="postup">Od podkladů po předání</h2>
+      <ol class="steps">
+        <li><span>01</span><h3>Poptávka</h3><p>Pošlete projekt, nebo náčrt, adresu a co má střecha umět.</p></li>
+        <li><span>02</span><h3>Rozpočet</h3><p>Připravíme předběžný rozpočet a sejdeme se nad ním.</p></li>
+        <li><span>03</span><h3>Zaměření</h3><p>Stavbu zaměříme a upřesníme konstrukci i termín.</p></li>
+        <li><span>04</span><h3>Výroba</h3><p>Po záloze vyrobíme konstrukci v hale v Ivanovicích na Hané.</p></li>
+        <li><span>05</span><h3>Montáž</h3><p>Přivezeme ji, smontujeme a v domluveném rozsahu předáme.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="reference">
+    <div class="wrap">
+      <p class="eyebrow">Realizace</p>
+      <h2 id="reference">Karty zakázek připravujeme</h2>
+      <p>Každá realizace bude mít obec, typ práce a rozměr. Než dorazí fotografie, jsou tu jen prázdné karty, ať je vidět struktura.</p>
+      <div class="refs">
+        {
+          ["Vazníky", "Krov", "Panely"].map((label) => (
+            <a class="card" href="/realizace/doplnime">
+              <div class="ref-media">
+                <img src="/brand/penti-znak-zlaty.svg" width="114" height="114" alt="" />
+                <span class="badge">Chybí fotografie</span>
+              </div>
+              <h3>{label}</h3>
+              <p>Místo a rozměr doplníme z podkladů firmy. Tohle není konkrétní stavba.</p>
+            </a>
+          ))
+        }
+      </div>
+      <p style="margin-top:16px"><a href="/realizace">Všechny realizace</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="duvera">
+    <div class="wrap trust">
+      <div>
+        <p class="eyebrow">Proč my</p>
+        <h2 id="duvera">Co o sobě můžeme říct rovnou</h2>
+        <p>Výrobu máme ve vlastní hale. Konstrukci staticky posoudíme a z dat jdou prvky na CNC pilu. U vazníků používáme sušené hoblované řezivo.</p>
+        <p>Působíme z Ivanovic na Hané a montáže domlouváme podle místa stavby. Orientační plochu střechy si spočítáte hned, cenu až v nabídce.</p>
+      </div>
+      <ul class="facts">
+        <li><strong>Od roku {company.since}</strong><span>dřevěné střešní konstrukce</span></li>
+        <li><strong>Do 30 m</strong><span>rozpětí vazníku bez vnitřní podpory</span></li>
+        <li><strong>{company.city}</strong><span>{company.street}</span></li>
+        <li><strong>{company.phoneDisplay}</strong><span><a href={`mailto:${company.inquiries}`}>{company.inquiries}</a></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>Pošlete střechu k nacenění</h2>
+          <p>Sedm krátkých kroků. Rozpracované údaje zůstanou v tomto prohlížeči. Cenu slibovat nebudeme, výkaz plochy ano.</p>
+        </div>
+        <a class="btn btn-primary" href="/poptavka/strecha">Spočítat střechu</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,45 @@
+---
+import { company } from "../lib/company";
+---
+
+<div class="cookie" id="cookie-bar" hidden>
+  <p>
+    Nezbytné údaje pro chod webu ukládáme do prohlížeče. Analytiku a reklamu (Google Tag Manager {company.gtmId}) spustíme až po souhlasu.
+    <a href="/cookies">Podrobnosti o cookies</a>
+  </p>
+  <div class="cookie-actions">
+    <button class="btn btn-secondary" type="button" id="cookie-reject">Odmítnout</button>
+    <button class="btn btn-primary" type="button" id="cookie-accept">Přijmout</button>
+  </div>
+</div>
+
+<script define:vars={{ gtmId: company.gtmId }}>
+  const key = "penti_consent";
+  const bar = document.querySelector("#cookie-bar");
+  const saved = localStorage.getItem(key);
+
+  function loadGtm() {
+    if (document.getElementById("gtm-loader")) return;
+    const script = document.createElement("script");
+    script.id = "gtm-loader";
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
+    document.head.append(script);
+    const w = window;
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+  }
+
+  if (saved === "granted") loadGtm();
+  else if (!saved) bar?.removeAttribute("hidden");
+
+  document.querySelector("#cookie-accept")?.addEventListener("click", () => {
+    localStorage.setItem(key, "granted");
+    loadGtm();
+    bar?.setAttribute("hidden", "");
+  });
+  document.querySelector("#cookie-reject")?.addEventListener("click", () => {
+    localStorage.setItem(key, "denied");
+    bar?.setAttribute("hidden", "");
+  });
+</script>

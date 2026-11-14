@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import SimpleForm from "../components/SimpleForm.astro";
+import { company } from "../lib/company";
+---
+
+<Base
+  title="Kontakt"
+  description="Kontakt na PENTI PREFAB s. r. o. v Ivanovicích na Hané. Telefon, e-mail na poptávky a lidé z obchodu, výroby a projekce."
+  path="/kontakt"
+>
+  <article class="wrap page-hero">
+    <p class="eyebrow">Kontakt</p>
+    <h1>Ozvěte se</h1>
+    <p class="lead">Na střechu je nejrychlejší konfigurátor. Obecný dotaz pošlete sem, nebo rovnou na e-mail.</p>
+    <div class="team">
+      <section class="card">
+        <h2>Sídlo</h2>
+        <p>
+          {company.name}<br />
+          {company.street}<br />
+          {company.postal} {company.city}
+        </p>
+        <p>
+          IČ {company.ico}<br />
+          DIČ {company.dic}<br />
+          {company.court}
+        </p>
+        <p>
+          <a href={`tel:${company.phoneTel}`}>{company.phoneDisplay}</a><br />
+          <a href={`mailto:${company.email}`}>{company.email}</a><br />
+          Poptávky: <a href={`mailto:${company.inquiries}`}>{company.inquiries}</a>
+        </p>
+        <p><a href={company.reservio}>Nezávazná schůzka přes Reservio</a></p>
+      </section>
+      <section class="card">
+        <h2>Lidé</h2>
+        {
+          company.people.map((person) => (
+            <p>
+              <strong>{person.name}</strong><br />
+              {person.role}<br />
+              <a href={`mailto:${person.email}`}>{person.email}</a>
+              {"phoneDisplay" in person && person.phoneDisplay ? (
+                <>
+                  <br />
+                  <a href={`tel:${person.phoneTel}`}>{person.phoneDisplay}</a>
+                </>
+              ) : null}
+            </p>
+          ))
+        }
+      </section>
+    </div>
+    <h2>Napsat zprávu</h2>
+    <SimpleForm kind="kontakt" submitLabel="Odeslat zprávu" messageLabel="Zpráva" />
+  </article>
+</Base>
