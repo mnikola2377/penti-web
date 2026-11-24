@@ -6,11 +6,11 @@ import { company } from "../lib/company";
 import { hero, realizace, sluzby } from "../data/foto";
 
 const description =
-  "PENTI PREFAB z Ivanovic na Hané vyrábí krovy a vazníky od roku 1992 a nově dělá i pokrývačské a klempířské práce a dřevostavby. Spočítejte si střechu.";
+  "PENTI PREFAB z Ivanovic na Hané vyrábí a realizuje dřevěné konstrukce a střechy na klíč. Krovy, vazníky, pokrývačství, klempířství a dřevostavby od roku 1992.";
 ---
 
 <Base
-  title="PENTI PREFAB | Krovy, střechy a dřevostavby"
+  title="PENTI PREFAB | Dřevěné konstrukce a střechy na klíč"
   description={description}
   path="/"
   jsonLd={{
@@ -25,14 +25,14 @@ const description =
     <div class="wrap hero-grid">
       <div>
         <p class="eyebrow">Ivanovice na Hané · od roku {company.since}</p>
-        <h1>Krovy a střechy, které jdou spočítat</h1>
+        <h1>Vyrábíme a realizujeme dřevěné konstrukce a střechy na klíč</h1>
         <hr class="gold-line" />
         <p class="lead">
-          Vyrábíme vazníky a klasické krovy a montujeme je. K tomu pokládáme krytinu, děláme klempířské práce a dodáváme panely dřevostaveb. Nabídku připravíme z údajů, které nám pošlete.
+          Vazníky, klasické krovy, krytinu, klempířské práce i panely dřevostaveb. Nabídku připravíme podle podkladů, které nám pošlete.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="/poptavka/strecha">Spočítat střechu</a>
-          <a class="btn btn-secondary" href="/drevostavby/typove-domy">Vybrat typový dům</a>
+          <a class="btn btn-primary" href="/poptavka/strecha">Poptat střechu</a>
+          <a class="btn btn-secondary" href="/drevostavby">Dřevostavby</a>
         </div>
       </div>
       <figure class="hero-figure">
@@ -44,7 +44,7 @@ const description =
           priority
           class="hero-photo"
         />
-        <figcaption>Klasický krov, 2008–2023. Obec a rozměr doplníme.</figcaption>
+        <figcaption>Klasický krov z let 2008–2023.</figcaption>
       </figure>
     </div>
   </section>
@@ -52,7 +52,7 @@ const description =
   <section class="section" aria-labelledby="sluzby">
     <div class="wrap">
       <p class="eyebrow">Co děláme</p>
-      <h2 id="sluzby">Čtyři cesty, jak u nás začít</h2>
+      <h2 id="sluzby">S čím se na nás můžete obrátit</h2>
       <div class="pillars">
         <a class="card card-media" href="/strechy/krovy">
           <Foto src={sluzby.konstrukce.src} alt={sluzby.konstrukce.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
@@ -66,7 +66,7 @@ const description =
           <Foto src={sluzby.pokryvacstvi.src} alt={sluzby.pokryvacstvi.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
           <div class="card-body">
             <h3>Pokrývačství</h3>
-            <p>Latění nebo bednění, pojistná hydroizolace a pokládka krytiny. Na snímku bobrovka z roku 2007.</p>
+            <p>Latění, pojistná hydroizolace a pokládka krytiny. Na fotce je bobrovka z roku 2007.</p>
             <span class="more">Pokrývačské práce</span>
           </div>
         </a>
@@ -74,7 +74,7 @@ const description =
           <Foto src={sluzby.klempirstvi.src} alt={sluzby.klempirstvi.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
           <div class="card-body">
             <h3>Klempířství</h3>
-            <p>Okapy, svody, lemování a úžlabí. Na snímku oplechování komínů z roku 2007.</p>
+            <p>Okapy, svody, lemování a úžlabí. Na fotce je oplechování komínů z roku 2007.</p>
             <span class="more">Klempířské práce</span>
           </div>
         </a>
@@ -82,7 +82,7 @@ const description =
           <Foto src={sluzby.drevostavby.src} alt={sluzby.drevostavby.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
           <div class="card-body">
             <h3>Typové dřevostavby</h3>
-            <p>Panely a hrubou stavbu už vyrábíme. Katalog typových domů teprve schvalujeme, ceny tu proto nejsou.</p>
+            <p>Panely a hrubou stavbu vyrábíme. Katalog typových domů ještě nemáme, ceny tu nejsou.</p>
             <span class="more">Dřevostavby</span>
           </div>
         </a>
@@ -93,9 +93,9 @@ const description =
   <section class="section" aria-labelledby="postup">
     <div class="wrap">
       <p class="eyebrow">Postup</p>
-      <h2 id="postup">Od podkladů po předání</h2>
+      <h2 id="postup">Jak zakázka probíhá</h2>
       <ol class="steps">
-        <li><span>01</span><h3>Poptávka</h3><p>Pošlete projekt, nebo náčrt, adresu a co má střecha umět.</p></li>
+        <li><span>01</span><h3>Poptávka</h3><p>Pošlete projekt nebo náčrt, adresu a napište, co potřebujete.</p></li>
         <li><span>02</span><h3>Rozpočet</h3><p>Připravíme předběžný rozpočet a sejdeme se nad ním.</p></li>
         <li><span>03</span><h3>Zaměření</h3><p>Stavbu zaměříme a upřesníme konstrukci i termín.</p></li>
         <li><span>04</span><h3>Výroba</h3><p>Po záloze vyrobíme konstrukci v hale v Ivanovicích na Hané.</p></li>
@@ -108,7 +108,7 @@ const description =
     <div class="wrap">
       <p class="eyebrow">Realizace</p>
       <h2 id="reference">Vybrané zakázky</h2>
-      <p>Názvy jsou podle typu práce a roku z podkladů. Obec a rozměr u každé karty teprve doplníme, nevymýšlíme je.</p>
+      <p>U fotek uvádíme typ práce a rok. Obec a rozměr doplníme, až je budeme znát.</p>
       <div class="refs">
         {realizace.filter((item) => item.featured).map((item) => <KartaRealizace item={item} />)}
       </div>
@@ -119,10 +119,10 @@ const description =
   <section class="section" aria-labelledby="duvera">
     <div class="wrap trust">
       <div>
-        <p class="eyebrow">Proč my</p>
-        <h2 id="duvera">Co o sobě můžeme říct rovnou</h2>
-        <p>Výrobu máme ve vlastní hale. Konstrukci staticky posoudíme a z dat jdou prvky na CNC pilu. U vazníků používáme sušené hoblované řezivo.</p>
-        <p>Působíme z Ivanovic na Hané a montáže domlouváme podle místa stavby. Orientační plochu střechy si spočítáte hned, cenu až v nabídce.</p>
+        <p class="eyebrow">Výroba</p>
+        <h2 id="duvera">Vlastní hala v Ivanovicích na Hané</h2>
+        <p>Konstrukci staticky spočítáme a prvky řežeme na CNC pile. Na vazníky bereme sušené hoblované řezivo.</p>
+        <p>Montujeme podle místa stavby. Orientační plochu střechy si spočítáte na webu. Cenu pošleme v nabídce.</p>
       </div>
       <ul class="facts">
         <li><strong>Od roku {company.since}</strong><span>dřevěné střešní konstrukce</span></li>
@@ -137,10 +137,10 @@ const description =
     <div class="wrap">
       <div class="band">
         <div>
-          <h2>Pošlete střechu k nacenění</h2>
-          <p>Sedm krátkých kroků. Rozpracované údaje zůstanou v tomto prohlížeči. Cenu slibovat nebudeme, výkaz plochy ano.</p>
+          <h2>Chcete nabídku na střechu?</h2>
+          <p>Vyplníte údaje o střeše. Rozpracovanou poptávku si prohlížeč pamatuje. Hned uvidíte orientační plochu a délky, cenu až v nabídce.</p>
         </div>
-        <a class="btn btn-primary" href="/poptavka/strecha">Spočítat střechu</a>
+        <a class="btn btn-primary" href="/poptavka/strecha">Poptat střechu</a>
       </div>
     </div>
   </section>
