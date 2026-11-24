@@ -1,0 +1,51 @@
+---
+import Base from "../../layouts/Base.astro";
+import Foto from "../../components/Foto.astro";
+import { chybiObec, chybiRozmer, realizace, realizacePodleSlug } from "../../data/foto";
+
+export function getStaticPaths() {
+  return realizace.map((item) => ({ params: { slug: item.slug } }));
+}
+
+const item = realizacePodleSlug(Astro.params.slug);
+if (!item) throw new Error("Realizace chybí");
+
+const description = `${item.title}. Fotografie práce PENTI PREFAB. Obec a rozměr zatím nejsou doplněné.`;
+---
+
+<Base title={item.title} description={description} path={`/realizace/${item.slug}`}>
+  <article class="wrap page-hero">
+    <p class="crumbs">
+      <a href="/">Domů</a> / <a href="/realizace">Realizace</a> / {item.title}
+    </p>
+    <p class="eyebrow">{item.kind} · {item.year}</p>
+    <h1>{item.title}</h1>
+    <p class="lead">{item.lead}</p>
+    <dl class="missing-fields">
+      <div>
+        <dt>Obec</dt>
+        <dd>{chybiObec}</dd>
+      </div>
+      <div>
+        <dt>Rozměr</dt>
+        <dd>{chybiRozmer}</dd>
+      </div>
+    </dl>
+    <div class="gallery">
+      {
+        item.photos.map((photo, index) => (
+          <figure>
+            <Foto
+              src={photo.src}
+              alt={photo.alt}
+              sizes="(min-width: 900px) 720px, 100vw"
+              widths={[640, 960, 1400]}
+              priority={index === 0}
+            />
+          </figure>
+        ))
+      }
+    </div>
+    <p><a class="btn btn-primary" href="/poptavka/strecha">Spočítat podobnou střechu</a></p>
+  </article>
+</Base>

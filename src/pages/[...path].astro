@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
+import Foto from "../components/Foto.astro";
 import { getPage, pages } from "../data/pages";
+import { stranky } from "../data/foto";
 
 export function getStaticPaths() {
   return pages.map((page) => ({ params: { path: page.path } }));
@@ -48,6 +50,17 @@ const jsonLd = page.serviceName
     <h1>{page.heading}</h1>
     <p class="lead">{page.lead}</p>
     {page.notice && <p class="notice">{page.notice}</p>}
+    {
+      (stranky[page.path] ?? []).length > 0 && (
+        <div class="gallery gallery-intro">
+          {stranky[page.path].map((photo) => (
+            <figure>
+              <Foto src={photo.src} alt={photo.alt} sizes="(min-width: 800px) 480px, 100vw" />
+            </figure>
+          ))}
+        </div>
+      )
+    }
     <div class="prose">
       {
         page.sections.map((section) => (

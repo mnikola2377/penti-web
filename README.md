@@ -4,7 +4,8 @@ První verze webu penti.cz. Světlý vzhled podle [grafického manuálu](https:/
 
 ## Co umí
 
-- Úvod se čtyřmi službami: krovy a konstrukce, pokrývačství, klempířství, typové dřevostavby.
+- Úvod se čtyřmi službami a fotografiemi z firemních alb. Obec a rozměr u realizací jsou pole k doplnění, nejsou vymyšlené.
+- Na stránce O nás je časová osa od firmy Oskara Funtíčka po dnešek. U předválečných snímků rok neuvádíme.
 - Konfigurátor střechy na `/poptavka/strecha`. Sedm kroků, podmíněné otázky, průběžný výkaz plochy, uložení rozpracované poptávky v prohlížeči a výstup `penti.inquiry.v1`.
 - Odeslání na `/api/poptavka`. Funkce balíček zkontroluje a zapíše ho do Supabase. Když chybí `SUPABASE_URL` nebo `SUPABASE_SERVICE_ROLE_KEY`, poptávku neodmítne: vrátí, že je v pořádku, ale neuložená. JSON si stáhnete na obrazovce.
 - Ostatní stránky mapy webu, aby šla proklikat navigace. Katalog domů, recenze, realizace a obchodní podmínky jsou označené jako podklady, které teprve dodáte.
