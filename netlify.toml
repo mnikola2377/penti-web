@@ -13,6 +13,95 @@
   to = "/realizace"
   status = 301
 
+[[redirects]]
+  from = "/prihradove-vazniky"
+  to = "/strechy/vazniky"
+  status = 301
+[[redirects]]
+  from = "/klasicke-krovy"
+  to = "/strechy/krovy"
+  status = 301
+[[redirects]]
+  from = "/drevostavebni-panely"
+  to = "/drevostavby/panely-hruba-stavba"
+  status = 301
+[[redirects]]
+  from = "/kompletni-strecha"
+  to = "/strechy/kompletni-strecha"
+  status = 301
+[[redirects]]
+  from = "/o-penti"
+  to = "/o-nas"
+  status = 301
+[[redirects]]
+  from = "/produkty"
+  to = "/material"
+  status = 301
+[[redirects]]
+  from = "/reseni/vazniky.html"
+  to = "/strechy/vazniky"
+  status = 301
+[[redirects]]
+  from = "/reseni/krovy.html"
+  to = "/strechy/krovy"
+  status = 301
+[[redirects]]
+  from = "/reseni/drevostavby.html"
+  to = "/drevostavby"
+  status = 301
+[[redirects]]
+  from = "/reseni/strechy.html"
+  to = "/strechy/kompletni-strecha"
+  status = 301
+[[redirects]]
+  from = "/reseni/pokryvacske.html"
+  to = "/strechy/pokryvacstvi"
+  status = 301
+[[redirects]]
+  from = "/reseni/klempirske.html"
+  to = "/strechy/klempirstvi"
+  status = 301
+[[redirects]]
+  from = "/penti/o-nas.html"
+  to = "/o-nas"
+  status = 301
+[[redirects]]
+  from = "/penti/vyroba.html"
+  to = "/vyroba"
+  status = 301
+[[redirects]]
+  from = "/penti/technologie.html"
+  to = "/technologie"
+  status = 301
+[[redirects]]
+  from = "/penti/kariera.html"
+  to = "/kariera"
+  status = 301
+[[redirects]]
+  from = "/penti/lide.html"
+  to = "/lide"
+  status = 301
+[[redirects]]
+  from = "/kalkulatory/strecha.html"
+  to = "/poptavka/strecha"
+  status = 301
+[[redirects]]
+  from = "/kalkulatory/vaznik.html"
+  to = "/kalkulatory/vaznik"
+  status = 301
+[[redirects]]
+  from = "/kalkulatory/krov.html"
+  to = "/kalkulatory/krov"
+  status = 301
+[[redirects]]
+  from = "/kalkulatory/material.html"
+  to = "/kalkulatory/material"
+  status = 301
+[[redirects]]
+  from = "/kalkulatory/drevostav.html"
+  to = "/kalkulatory/drevostav"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]

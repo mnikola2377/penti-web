@@ -1,0 +1,18 @@
+---
+import Base from "../../layouts/Base.astro";
+const description = "Kalkulačky PENTI: výkaz střechy, orientační cena vazníků, krov a materiál. Ceny vazníků jsou odhad z obálky domu, ne nabídka.";
+---
+<Base title="Kalkulačky" description={description} path="/kalkulatory">
+  <article class="wrap page-hero">
+    <p class="eyebrow">Kalkulačky</p>
+    <h1>Spočítejte si střechu nebo vazníky</h1>
+    <p class="lead">Výkaz střechy cenu neukazuje. U vazníků uvidíte orientační rozpětí bez DPH. Závazná cena přijde v nabídce.</p>
+    <div class="pillars">
+      <a class="card" href="/poptavka/strecha"><h3>Střecha</h3><p>Tašky, latě, fólie, žlaby a svody. Když zvolíte krov, i výkaz řeziva.</p><span class="more">Otevřít</span></a>
+      <a class="card" href="/kalkulatory/vaznik"><h3>Vazníky</h3><p>Počet vazníků, plocha a orientační cena z rozměrů domu.</p><span class="more">Otevřít</span></a>
+      <a class="card" href="/kalkulatory/krov"><h3>Krov</h3><p>Stejný průvodce jako u střechy, rovnou nastavený na klasický krov.</p><span class="more">Otevřít</span></a>
+      <a class="card" href="/kalkulatory/material"><h3>Materiál</h3><p>Výkaz jen materiálu, bez montáže.</p><span class="more">Otevřít</span></a>
+      <a class="card" href="/kalkulatory/drevostav"><h3>Dřevostavba</h3><p>Kalkulačku domu ještě nemáme. Panely poptáte u nás ručně.</p><span class="more">Otevřít</span></a>
+    </div>
+  </article>
+</Base>

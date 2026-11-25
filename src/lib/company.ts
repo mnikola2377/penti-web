@@ -71,6 +71,17 @@ export const nav = [
     ],
   },
   { label: "Realizace", href: "/realizace" },
+  {
+    label: "Kalkulačky",
+    href: "/kalkulatory",
+    children: [
+      { label: "Střecha", href: "/poptavka/strecha" },
+      { label: "Vazníky", href: "/kalkulatory/vaznik" },
+      { label: "Krov", href: "/kalkulatory/krov" },
+      { label: "Materiál", href: "/kalkulatory/material" },
+      { label: "Dřevostavba", href: "/kalkulatory/drevostav" },
+    ],
+  },
   { label: "Poradna", href: "/poradna" },
   {
     label: "O nás",
@@ -79,6 +90,7 @@ export const nav = [
       { label: "O firmě", href: "/o-nas" },
       { label: "Výroba", href: "/vyroba" },
       { label: "Technologie", href: "/technologie" },
+      { label: "Lidé", href: "/lide" },
       { label: "Kontakt", href: "/kontakt" },
     ],
   },

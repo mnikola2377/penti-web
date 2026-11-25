@@ -6,7 +6,7 @@
  */
 
 export type RoofShape = "sedlova" | "valbova" | "pultova" | "mansardova" | "jina";
-export type PlanShape = "obdelnik" | "jiny";
+export type PlanShape = "obdelnik" | "ctverec" | "L" | "T" | "U" | "lichobeznik" | "jiny" | "vlastni";
 
 export interface RoofGeometryInput {
   shape: RoofShape;

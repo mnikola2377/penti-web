@@ -56,19 +56,19 @@
 }
 
 :root {
-  --papir: #f6f1e7;
-  --bila: #ffffff;
-  --smrk: #e6cfa3;
-  --linka: #ddd3c1;
-  --ink: #1b251e;
-  --ink-muted: #56605a;
-  --zelena: #1b251e;
+  --papir: #1b251e;
+  --bila: #243029;
+  --smrk: #3a3228;
+  --linka: rgba(246, 241, 231, 0.18);
+  --ink: #f6f1e7;
+  --ink-muted: #d5cec2;
+  --zelena: #141c17;
   --on-zelena: #f6f1e7;
   --zlata: #bf935b;
-  --zlata-text: #8a6334;
+  --zlata-text: #bf935b;
   --jehlici: #46704a;
   --on-jehlici: #ffffff;
-  --focus: var(--jehlici);
+  --focus: #c5d9c6;
   --font-sans: "Barlow", "Segoe UI", Arial, sans-serif;
   --font-cond: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
   --space-1: 4px;
@@ -150,8 +150,12 @@ p { margin: 0 0 12px; max-width: 68ch; }
   color: var(--ink);
 }
 
-a { color: var(--jehlici); }
-a:hover { color: #345638; }
+a { color: #c5d9c6; }
+a:hover { color: #f6f1e7; }
+.btn-primary,
+.btn-primary:hover,
+.btn-on-dark,
+.btn-on-dark:hover { color: var(--on-jehlici); }
 
 .btn {
   display: inline-flex;
@@ -182,9 +186,8 @@ a:hover { color: #345638; }
   position: sticky;
   top: 0;
   z-index: 30;
-  background: color-mix(in srgb, var(--papir) 92%, white);
-  border-bottom: 1px solid var(--linka);
-  backdrop-filter: blur(8px);
+  background: #1b251e;
+  border-bottom: 2px solid var(--zlata);
 }
 .header-inner {
   display: flex;
@@ -313,7 +316,7 @@ a:hover { color: #345638; }
 }
 a.card:hover h3 { color: var(--jehlici); }
 .card p { margin: 0; }
-.card .more { margin-top: auto; font-weight: 700; color: var(--jehlici); }
+.card .more { margin-top: auto; font-weight: 700; color: #c5d9c6; }
 .card-media { padding: 0; overflow: hidden; }
 .card-body { display: flex; flex-direction: column; gap: 8px; padding: 20px; flex: 1; }
 .card picture { display: block; background: var(--smrk); }
@@ -492,7 +495,7 @@ a.card:hover h3 { color: var(--jehlici); }
   gap: 24px;
   padding-top: 28px;
 }
-.footer-logo { width: 180px; height: auto; }
+.footer-logo { width: 180px; height: 34px; aspect-ratio: 597 / 114; }
 .site-footer a { color: var(--on-zelena); }
 .site-footer h2 {
   font: 700 14px/18px var(--font-cond);
