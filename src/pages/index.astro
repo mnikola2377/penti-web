@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import Foto from "../components/Foto.astro";
 import KartaRealizace from "../components/KartaRealizace.astro";
 import SplitHeading from "../components/SplitHeading.astro";
-import { company } from "../lib/company";
+import { company, eshopLinks } from "../lib/company";
 import { hero, realizace, sluzby } from "../data/foto";
 
 const description =
@@ -131,6 +131,29 @@ const description =
         <li><strong>{company.city}</strong><span>{company.street}</span></li>
         <li><strong>{company.phoneDisplay}</strong><span><a href={`mailto:${company.inquiries}`}>{company.inquiries}</a></span></li>
       </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="eshop">
+    <div class="wrap">
+      <p class="eyebrow">Sklad</p>
+      <SplitHeading as="h2" id="eshop" light="Řezivo" strong="a materiál v e-shopu" />
+      <p>
+        Ceny, dostupnost a objednávku necháváme v e-shopu. Tady jsou jen skupiny zboží, které tam opravdu jsou.
+        Osobní odběr je v {company.city}. Otevírací dobu výdeje e-shop zatím neuvádí.
+      </p>
+      <div class="pillars eshop-links">
+        {
+          eshopLinks.map((item) => (
+            <a class="card" href={item.href} rel="noopener noreferrer">
+              <h3>{item.label}</h3>
+              <p>{item.note}</p>
+              <span class="more">Otevřít v e-shopu</span>
+            </a>
+          ))
+        }
+      </div>
+      <p style="margin-top:16px"><a href={company.eshop} rel="noopener noreferrer">Celý e-shop</a></p>
     </div>
   </section>
 

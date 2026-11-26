@@ -21,7 +21,11 @@ const current = Astro.url.pathname;
           {
             nav.map((item) => (
               <li class="nav-item">
-                <a href={item.href} aria-current={current === item.href ? "page" : undefined}>
+                <a
+                  href={item.href}
+                  aria-current={!("external" in item) && current === item.href ? "page" : undefined}
+                  rel={"external" in item ? "noopener noreferrer" : undefined}
+                >
                   {item.label}
                 </a>
                 {"children" in item && item.children ? (

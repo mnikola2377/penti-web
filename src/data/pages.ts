@@ -101,6 +101,16 @@ export const pages: SitePage[] = [
           "Tesaři konstrukci přikotví a smontují.",
         ],
       },
+      {
+        heading: "Řezivo v e-shopu",
+        paragraphs: [
+          "KVH, DUO/TRIO, fošny, prkna a latě jdou objednat v e-shopu. Lepené lamelové dřevo BSH tam není, to zůstává součástí nabídky na krov.",
+        ],
+        links: [
+          { href: "https://eshop-penti.netlify.app/#/obchod/wood", label: "Řezivo v e-shopu" },
+          { href: "https://eshop-penti.netlify.app/#/obchod/spojovaci", label: "Spojovací materiál" },
+        ],
+      },
     ],
     cta: { href: "/poptavka/strecha", label: "Poptat krov" },
   },
@@ -127,6 +137,17 @@ export const pages: SitePage[] = [
         heading: "Co od vás potřebujeme",
         paragraphs: [
           "Adresu stavby, tvar a sklon střechy a představu o krytině. U rekonstrukce i fotografie. Výrobce krytiny vybereme v nabídce podle skladby, na těchto stránkách značky nejmenujeme.",
+        ],
+      },
+      {
+        heading: "Fólie a pásky v e-shopu",
+        paragraphs: [
+          "V e-shopu je jedna difuzní podstřešní fólie a těsnicí pásky pod kontralatě. Latě jsou u řeziva. Krytinu tam neprodáváme.",
+        ],
+        links: [
+          { href: "https://eshop-penti.netlify.app/#/obchod/folie", label: "Střešní fólie" },
+          { href: "https://eshop-penti.netlify.app/#/obchod/paska", label: "Těsnicí pásky" },
+          { href: "https://eshop-penti.netlify.app/#/obchod/wood", label: "Latě a další řezivo" },
         ],
       },
     ],
@@ -303,11 +324,11 @@ export const pages: SitePage[] = [
   {
     path: "material",
     title: "Materiál",
-    description: "Řezivo a desky, se kterými PENTI PREFAB staví. Samostatný e-shop a výdejní doba se teprve doplňují.",
+    description: "Řezivo a desky, se kterými PENTI PREFAB staví. Skladový prodej je v e-shopu, ceny na tomto webu nejsou.",
     eyebrow: "Materiál",
     heading: "Řezivo z naší výroby",
-    lead: "Konstrukce vyrábíme z materiálu, který sami zpracováváme. Veřejný ceník a otevírací dobu výdeje na tomto webu zatím nemáme.",
-    notice: "Ceny neuvádíme. E-shop řeziva běží jako samostatný projekt a po sjednocení vzhledu ho sem napojíme.",
+    lead: "Konstrukce vyrábíme z materiálu, který sami zpracováváme. Ceník a otevírací dobu výdeje na těchto stránkách nemáme, obojí je v e-shopu.",
+    notice: "Ceny sem neopisujeme. V e-shopu je řezivo, jedna difuzní fólie, těsnicí pásky a spojovací materiál. BSH, LVL ani sádrovláknité desky tam nejsou.",
     sections: [
       {
         heading: "S čím pracujeme",
@@ -317,6 +338,16 @@ export const pages: SitePage[] = [
           "LVL tam, kde to vyžaduje statika.",
           "OSB a sádrovláknité desky na opláštění panelů.",
           "Latě a prkna pro střešní skladbu.",
+        ],
+      },
+      {
+        heading: "Co je v e-shopu",
+        links: [
+          { href: "https://eshop-penti.netlify.app/#/obchod/wood", label: "Řezivo: KVH, DUO/TRIO, fošny, prkna, latě a OSB" },
+          { href: "https://eshop-penti.netlify.app/#/obchod/folie", label: "Střešní fólie" },
+          { href: "https://eshop-penti.netlify.app/#/obchod/paska", label: "Těsnicí pásky pod kontralatě" },
+          { href: "https://eshop-penti.netlify.app/#/obchod/spojovaci", label: "Spojovací materiál" },
+          { href: "https://eshop-penti.netlify.app/", label: "Celý e-shop" },
         ],
       },
     ],
@@ -497,7 +528,8 @@ export const pages: SitePage[] = [
     sections: [
       {
         heading: "Kde je najdete",
-        paragraphs: ["Otevřete https://penti.cz/o-penti a v části Ke stažení vyberte všeobecné obchodní podmínky a další dokumenty. Až soubory dostaneme, vystavíme je přímo tady."],
+        paragraphs: ["Na stávajícím webu jsou v části Ke stažení: všeobecné obchodní podmínky a další dokumenty. Až soubory dostaneme, vystavíme je přímo tady."],
+        links: [{ href: "https://penti.cz/o-penti", label: "Dokumenty ke stažení na penti.cz" }],
       },
     ],
   },
