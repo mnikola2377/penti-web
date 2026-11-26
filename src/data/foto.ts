@@ -166,9 +166,9 @@ export const realizace: Realizace[] = [
     title: "Klasický věšadlový krov, Slavkov u Brna",
     year: "2014",
     kind: "Klasický krov",
-    lead: "Klasický věšadlový krov ve Slavkově u Brna z roku 2014.",
+    lead: "Klasický věšadlový krov ve Slavkově u Brna z roku 2014, půdorys 8,6 × 16 m.",
     obec: "Slavkov u Brna",
-    rozmer: null,
+    rozmer: "půdorys 8,6 × 16 m",
     featured: true,
     cover: {
       src: krovNebeSirsi,
@@ -410,7 +410,7 @@ export const historie: Obdobi[] = [
     id: "slavkov-2014",
     label: "2014",
     title: "Klasický věšadlový krov, Slavkov u Brna",
-    text: "Klasický věšadlový krov ve Slavkově u Brna z roku 2014.",
+    text: "Klasický věšadlový krov ve Slavkově u Brna z roku 2014, půdorys 8,6 × 16 m.",
     photos: [
       {
         src: krovNebe,
