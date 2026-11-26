@@ -36,6 +36,10 @@ export interface Realizace {
   cover: Foto;
   photos: Foto[];
   featured: boolean;
+  /** Když chybí, na kartě zůstane „Doplní firma“. */
+  obec?: string;
+  /** null = rozměr neuvádět. Když chybí, na kartě zůstane „Doplní firma“. */
+  rozmer?: string | null;
 }
 
 export const chybiObec = "Doplní firma";
@@ -239,14 +243,16 @@ export const realizace: Realizace[] = [
   },
   {
     slug: "pokryvacstvi-klempirstvi-2007",
-    title: "Pokrývačské a klempířské práce, 2007",
-    year: "2007",
+    title: "Rekonstrukce střechy předzámčí, Ivanovice na Hané",
+    year: "26. 2. 2007",
     kind: "Pokrývačství a klempířství",
-    lead: "Zakázka z 26. února 2007, v podkladech vedená jako Bioveta: bobrovka, oplechování komínů a oprava krovu.",
+    lead: "26. února 2007. Pokládka bobrovky, klempířina u komínů a oprava krovu.",
+    obec: "Ivanovice na Hané",
+    rozmer: null,
     featured: true,
     cover: {
       src: bobrovkaDetail,
-      alt: "Plocha bobrovky s oplechovaným komínem, zakázka z února 2007.",
+      alt: "Plocha bobrovky s oplechovaným komínem, rekonstrukce střechy předzámčí v Ivanovicích na Hané, 26. února 2007.",
     },
     photos: [
       {
@@ -359,14 +365,14 @@ export const historie: Obdobi[] = [
     ],
   },
   {
-    id: "bioveta",
-    label: "2007",
-    title: "Bioveta, pokrývačství a klempířství",
-    text: "26. února 2007, zakázka v podkladech vedená jako Bioveta: pokládka bobrovky, klempířina u komínů a oprava krovu.",
+    id: "predzamci-2007",
+    label: "26. 2. 2007",
+    title: "Rekonstrukce střechy předzámčí, Ivanovice na Hané",
+    text: "26. února 2007, rekonstrukce střechy předzámčí v Ivanovicích na Hané: pokládka bobrovky, klempířina u komínů a oprava krovu.",
     photos: [
       {
         src: bobrovkaDetail,
-        alt: "Bobrovka a oplechovaný komín na střeše zakázky Bioveta, 26. února 2007.",
+        alt: "Bobrovka a oplechovaný komín, rekonstrukce střechy předzámčí v Ivanovicích na Hané, 26. února 2007.",
       },
       {
         src: bobrovkaHotovo,

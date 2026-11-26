@@ -14,7 +14,9 @@ const { item, sizes = "(min-width: 900px) 340px, 100vw" } = Astro.props;
   <div class="card-body">
     <p class="eyebrow">{item.kind}</p>
     <h3>{item.title}</h3>
-    <p class="missing">Obec: {chybiObec}. Rozměr: {chybiRozmer}.</p>
+    <p class="missing">
+      Obec: {item.obec ?? chybiObec}.{item.rozmer === null ? "" : ` Rozměr: ${item.rozmer ?? chybiRozmer}.`}
+    </p>
     <span class="more">Otevřít realizaci</span>
   </div>
 </a>

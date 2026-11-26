@@ -11,7 +11,9 @@ export function getStaticPaths() {
 const item = realizacePodleSlug(Astro.params.slug);
 if (!item) throw new Error("Realizace chybí");
 
-const description = `${item.title}. Fotografie práce PENTI PREFAB. Obec a rozměr zatím nejsou doplněné.`;
+const description = item.obec
+  ? `${item.title}. ${item.lead}`
+  : `${item.title}. Fotografie práce PENTI PREFAB. Obec a rozměr zatím nejsou doplněné.`;
 ---
 
 <Base title={item.title} description={description} path={`/realizace/${item.slug}`}>
@@ -25,12 +27,16 @@ const description = `${item.title}. Fotografie práce PENTI PREFAB. Obec a rozm�
     <dl class="missing-fields">
       <div>
         <dt>Obec</dt>
-        <dd>{chybiObec}</dd>
+        <dd>{item.obec ?? chybiObec}</dd>
       </div>
-      <div>
-        <dt>Rozměr</dt>
-        <dd>{chybiRozmer}</dd>
-      </div>
+      {
+        item.rozmer !== null && (
+          <div>
+            <dt>Rozměr</dt>
+            <dd>{item.rozmer ?? chybiRozmer}</dd>
+          </div>
+        )
+      }
     </dl>
     <div class="gallery">
       {
