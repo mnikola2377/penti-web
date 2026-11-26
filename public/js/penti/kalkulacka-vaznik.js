@@ -39,23 +39,23 @@ document.addEventListener('DOMContentLoaded', function () {
      kde se osvědčily. */
   var TVARY = [
     { kod: 'obdelnik',    nazev: 'Obdélník',
-      pole: [['A', 'Délka (m)', 12], ['B', 'Šířka (m)', 8]] },
+      pole: [['A', 'Délka domu – venkovní rozměr zdiva (m)', 12], ['B', 'Šířka domu – venkovní rozměr zdiva (m)', 8]] },
     { kod: 'ctverec',     nazev: 'Čtverec',
-      pole: [['A', 'Strana (m)', 10]] },
+      pole: [['A', 'Strana domu – venkovní rozměr zdiva (m)', 10]] },
     { kod: 'L',           nazev: 'Tvar L',
-      pole: [['L1', 'Dolní rameno – délka (m)', 13], ['W1', 'Dolní rameno – šířka (m)', 8],
-             ['L2', 'Boční rameno – délka (m)', 11], ['W2', 'Boční rameno – šířka (m)', 6]],
+      pole: [['L1', 'Dolní rameno – délka, venkovní zdivo (m)', 13], ['W1', 'Dolní rameno – šířka, venkovní zdivo (m)', 8],
+             ['L2', 'Boční rameno – délka, venkovní zdivo (m)', 11], ['W2', 'Boční rameno – šířka, venkovní zdivo (m)', 6]],
       konce: [1, 4] },
     { kod: 'T',           nazev: 'Tvar T',
-      pole: [['A', 'Hlavní část – délka (m)', 14], ['TW', 'Hlavní část – šířka (m)', 7],
-             ['SW', 'Noha – šířka (m)', 6], ['SL', 'Noha – délka (m)', 6]],
+      pole: [['A', 'Hlavní část – délka, venkovní zdivo (m)', 14], ['TW', 'Hlavní část – šířka, venkovní zdivo (m)', 7],
+             ['SW', 'Noha – šířka, venkovní zdivo (m)', 6], ['SL', 'Noha – délka, venkovní zdivo (m)', 6]],
       konce: [0, 3, 5] },
     { kod: 'U',           nazev: 'Tvar U',
-      pole: [['UA', 'Základna – šířka (m)', 14], ['UD', 'Základna – hloubka (m)', 6],
-             ['WW', 'Křídlo – šířka (m)', 5], ['WL', 'Křídlo – délka navíc (m)', 6]],
+      pole: [['UA', 'Základna – šířka, venkovní zdivo (m)', 14], ['UD', 'Základna – hloubka, venkovní zdivo (m)', 6],
+             ['WW', 'Křídlo – šířka, venkovní zdivo (m)', 5], ['WL', 'Křídlo – délka navíc, venkovní zdivo (m)', 6]],
       konce: [2, 6] },
     { kod: 'lichobeznik', nazev: 'Lichoběžník',
-      pole: [['A', 'Dolní šířka (m)', 12], ['C', 'Horní šířka (m)', 8], ['B', 'Hloubka (m)', 7]],
+      pole: [['A', 'Dolní šířka, venkovní zdivo (m)', 12], ['C', 'Horní šířka, venkovní zdivo (m)', 8], ['B', 'Hloubka, venkovní zdivo (m)', 7]],
       konce: [1, 3] }
   ];
   var tvarPudorysu = 'obdelnik';
@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
       slope: cislo('w-sklon', 30),
       roztec: cislo('w-roztech', 1),
       presah: cislo('w-presah', 0.6),
+      presahStit: cislo('w-stit', 0.6),
       km: cislo('w-km', 70),
       snehovaOblast: vyber('w-sneh'),
       vetrnaOblast: vyber('w-vitr'),
@@ -229,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
         roof: z.roof,
         slope: z.slope,
         oOkap: z.presah,
-        oStit: z.presah,
+        oStit: z.presahStit,
         planeSlopes: {}, endState: z.konceStitu || {}, pultDir: 'dolu'
       });
       var o = window.PentiVaznikWeb.odhad(geo, {
@@ -417,7 +418,9 @@ document.addEventListener('DOMContentLoaded', function () {
       + 'Tvar střechy: ' + z.roof + '\n'
       + 'Sklon: ' + z.slope + '°\n'
       + 'Rozteč vazníků: ' + z.roztec + ' m\n'
+      + 'Rozměry jsou vnější líc zdiva, bez přesahů.\n'
       + 'Přesah u okapu: ' + z.presah + ' m\n'
+      + 'Přesah u štítu: ' + z.presahStit + ' m\n'
       + 'Vzdálenost stavby: ' + z.km + ' km\n'
       + 'Sněhová oblast: ' + z.snehovaOblast + ', větrná: ' + z.vetrnaOblast + '\n\n'
       + 'Odhad z kalkulačky: ' + (document.getElementById('f-odhad').value || '—') + '\n';
@@ -482,8 +485,9 @@ document.addEventListener('DOMContentLoaded', function () {
         pitch_deg: z.slope || null,
         pitch_upper_deg: null,
         break_from_wall_m: null,
+        dimensions_basis: 'outer_masonry',
         eave_overhang_m: z.presah,
-        gable_overhang_m: z.presah,
+        gable_overhang_m: z.presahStit,
         dormers_count: null,
         attic_use: z.vyuzitiPodkrovi === 'obytne' ? 'obytne' : (z.vyuzitiPodkrovi === 'uloziste' ? 'puda' : 'nevyapene'),
         insulation_interest: null,

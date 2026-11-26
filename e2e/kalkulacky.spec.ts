@@ -42,6 +42,8 @@ test.beforeEach(async ({ page }) => {
 test("střecha: chybějící rozměr zastaví krok a pak jde až k odeslání", async ({ page }, info) => {
   const errors = sbirejChyby(page);
   await page.goto("/poptavka/strecha/");
+  await expect(page.locator(".rozmer-napoveda").first()).toContainText("vnější líc");
+  await expect(page.locator("label[for='w-dim-A']")).toContainText("venkovní rozměr zdiva");
   await expect(page.locator("#w-strechy button")).toHaveCount(3);
   await expect(page.locator("script[src='/js/penti/penti-wizard.js']")).toHaveCount(1);
 
@@ -79,8 +81,14 @@ test("střecha: chybějící rozměr zastaví krok a pak jde až k odeslání", 
   );
   await page.locator("#res-odeslat").click();
   const res = await response;
-  const payload = res.request().postDataJSON() as { contact?: { name?: string }; note?: string };
+  const payload = res.request().postDataJSON() as {
+    contact?: { name?: string };
+    roof?: { dimensions_basis?: string; eave_overhang_m?: number; gable_overhang_m?: number };
+  };
   expect(payload.contact?.name).toContain("TEST");
+  expect(payload.roof?.dimensions_basis).toBe("outer_masonry");
+  expect(payload.roof?.eave_overhang_m).toBe(0.5);
+  expect(payload.roof?.gable_overhang_m).toBe(0.3);
   expect(res.ok(), await res.text()).toBeTruthy();
   await expect(page.locator("#res-stav")).toContainText("Poptávka odeslána");
   expect(errors, errors.join("\n")).toEqual([]);
@@ -119,6 +127,9 @@ test("vazník dojde k orientační ceně", async ({ page }) => {
   await expect(page.locator(".wizard-panel.active")).toContainText("Jaký tvar");
   await dalsi(page);
   await expect(page.locator("#w-sklon")).toBeVisible();
+  await expect(page.locator(".rozmer-napoveda").first()).toContainText("vnější líc");
+  await expect(page.locator("#w-presah")).toBeVisible();
+  await expect(page.locator("#w-stit")).toBeVisible();
   await page.locator("#w-dim-A").fill("");
   await dalsi(page);
   await expect(page.locator("#wizard-chyba")).toContainText("Délka");

@@ -44,11 +44,14 @@
           <!-- Rozměry vedle okótovaného schématu. Z názvu pole („boční
                rameno – šířka") si člověk nevybaví, která strana to je. -->
           <div class="layout-2col" style="--bok:280px;--mezera:28px">
-            <div id="w-rozmery"></div>
+            <div>
+              <p class="rozmer-napoveda">Bez přesahů střechy, ty zadáte níže. Měří se vnější líc obvodového zdiva.</p>
+              <div id="w-rozmery"></div>
+            </div>
             <div>
               <div id="w-schema"></div>
               <div style="font-size:.75rem;color:var(--muted);margin-top:8px;">
-                Klikněte do pole a příslušná strana se v obrázku zvýrazní.
+                Klikněte do pole a příslušná strana se v obrázku zvýrazní. Schéma je zdivo, bez přesahů.
               </div>
             </div>
           </div>
@@ -66,7 +69,8 @@
 
         <!-- ── 2. SKLON, PŘESAHY, SNÍH ──────────────────────────────── -->
         <div class="wizard-panel">
-          <h2 class="t-h3" style="margin-bottom:24px;">Sklon, přesahy a sníh</h2>
+          <h2 class="t-h3" style="margin-bottom:12px;">Sklon, přesahy a sníh</h2>
+          <p class="rozmer-napoveda">Přesah u okapu a u štítu se přičte k venkovnímu zdivu. Plocha střechy je zdivo plus přesahy.</p>
           <div class="wizard-2col">
             <div class="wizard-field-group">
               <label class="wizard-label">Sklon střechy (°)</label>

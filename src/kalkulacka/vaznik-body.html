@@ -84,11 +84,14 @@
                obrázek a strana, jejíž pole má zákazník pod rukou, se
                rozsvítí. -->
           <div class="layout-2col" style="--bok:300px;--mezera:28px">
-            <div class="wizard-2col" id="w-rozmery"></div>
+            <div>
+              <p class="rozmer-napoveda">Bez přesahů střechy, ty zadáte níže. Měří se vnější líc obvodového zdiva.</p>
+              <div class="wizard-2col" id="w-rozmery"></div>
+            </div>
             <div>
               <div id="w-schema"></div>
               <div style="font-size:.75rem;color:var(--muted);margin-top:8px;">
-                Klikněte do pole a příslušná strana se v obrázku zvýrazní.
+                Klikněte do pole a příslušná strana se v obrázku zvýrazní. Schéma je zdivo, bez přesahů.
               </div>
             </div>
           </div>
@@ -118,8 +121,13 @@
               <div id="roztec-pozn" style="font-size:.78rem;color:var(--gold);margin-top:8px;display:none;"></div>
             </div>
             <div class="wizard-field-group">
-              <label class="wizard-label">Přesah střechy u okapu (m)</label>
+              <label class="wizard-label" for="w-presah">Přesah u okapu (m)</label>
               <input class="wizard-input" type="number" id="w-presah" min="0" max="2" step="0.1" value="0.6">
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label" for="w-stit">Přesah u štítu (m)</label>
+              <input class="wizard-input" type="number" id="w-stit" min="0" max="2" step="0.1" value="0.6">
+              <p class="rozmer-napoveda">Oba přesahy se přičtou k venkovnímu zdivu. Cena vazníku je ze šikmé plochy střechy včetně nich.</p>
             </div>
             <div class="wizard-field-group">
               <label class="wizard-label">Vzdálenost stavby od výrobny (km)</label>

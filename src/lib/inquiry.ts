@@ -136,6 +136,7 @@ export interface PentiInquiry {
     pitch_deg: number | null;
     pitch_upper_deg: number | null;
     break_from_wall_m: number | null;
+    dimensions_basis?: "outer_masonry";
     eave_overhang_m: number | null;
     gable_overhang_m: number | null;
     dormers_count: number | null;

@@ -89,7 +89,13 @@
 .kalk #calc-wizard { min-height: 780px; }
 .kalk #w-strechy,
 .kalk #w-tvary { min-height: 48px; }
-.kalk #w-rozmery { min-height: 168px; }
+.kalk #w-rozmery { min-height: 220px; }
+.kalk .rozmer-napoveda {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
 .kalk #wizard-chyba {
   background: #fff;
   color: #1b251e;
