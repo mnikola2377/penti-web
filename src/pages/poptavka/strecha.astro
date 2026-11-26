@@ -9,27 +9,27 @@ const description =
 
 <Base title="Kalkulátor střechy" description={description} path="/poptavka/strecha">
   <div class="kalk" set:html={fragment} />
+  <script is:inline src="/js/penti/penti-engine.js"></script>
+  <script is:inline src="/js/penti/penti-okapy.js"></script>
+  <script is:inline src="/js/penti/penti-katalog-web.js"></script>
+  <script is:inline src="/js/penti/penti-strecha-web.js"></script>
+  <script is:inline src="/js/penti/penti-statika.js"></script>
+  <script is:inline src="/js/penti/penti-rezivo.js"></script>
+  <script is:inline src="/js/penti/penti-spoje.js"></script>
+  <script is:inline src="/js/penti/penti-narozi.js"></script>
+  <script is:inline src="/js/penti/penti-krov.js"></script>
+  <script is:inline src="/js/penti/penti-krov-profily.js"></script>
+  <script is:inline src="/js/penti/penti-krov-web.js"></script>
+  <script is:inline src="/js/penti/penti-spojovak.js"></script>
+  <script is:inline src="/js/penti/penti-kresba-web.js"></script>
+  <script is:inline src="/js/penti/kalkulacka-strecha.js"></script>
+  <script is:inline src="/js/penti/penti-wizard.js"></script>
+  <script is:inline>
+    function pdToggle(r) {
+      var b = r.closest(".pd-blok");
+      if (!b) return;
+      var s = b.querySelector(".pd-soubory");
+      if (s) s.style.display = r.value === "ano" && r.checked ? "block" : "none";
+    }
+  </script>
 </Base>
-
-<script is:inline src="/js/penti/penti-engine.js"></script>
-<script is:inline src="/js/penti/penti-okapy.js"></script>
-<script is:inline src="/js/penti/penti-katalog-web.js"></script>
-<script is:inline src="/js/penti/penti-strecha-web.js"></script>
-<script is:inline src="/js/penti/penti-statika.js"></script>
-<script is:inline src="/js/penti/penti-rezivo.js"></script>
-<script is:inline src="/js/penti/penti-spoje.js"></script>
-<script is:inline src="/js/penti/penti-narozi.js"></script>
-<script is:inline src="/js/penti/penti-krov.js"></script>
-<script is:inline src="/js/penti/penti-krov-profily.js"></script>
-<script is:inline src="/js/penti/penti-krov-web.js"></script>
-<script is:inline src="/js/penti/penti-spojovak.js"></script>
-<script is:inline src="/js/penti/penti-kresba-web.js"></script>
-<script is:inline src="/js/penti/kalkulacka-strecha.js"></script>
-<script is:inline>
-  function pdToggle(r) {
-    var b = r.closest(".pd-blok");
-    if (!b) return;
-    var s = b.querySelector(".pd-soubory");
-    if (s) s.style.display = r.value === "ano" && r.checked ? "block" : "none";
-  }
-</script>

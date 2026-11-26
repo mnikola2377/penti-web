@@ -170,6 +170,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return x.toLocaleString('cs-CZ').replace(/\s/g, '\u00A0') + '\u00A0Kč';
   };
 
+  var posledniOdhad = null;
+
   function sesbirej() {
     var dims = {};
     tvarInfo().pole.forEach(function (p) { dims[p[0]] = cislo('w-dim-' + p[0], p[2]); });
@@ -254,7 +256,9 @@ document.addEventListener('DOMContentLoaded', function () {
       cil.cena.textContent = kc(o.od) + ' – ' + kc(o.do);
       cil.cena.classList.remove('jako-text');
       cil.pozn.textContent = 'Zahrnuje výrobu, montáž i dopravu na ' + z.km + ' km.'
-        + (o.nadrozmerny ? ' Vazník přesahuje 3,2 m — počítáme s doprovodem nadrozměrného nákladu.' : '');
+        + (o.nadrozmerny ? ' Vazník přesahuje 3,2 m — počítáme s doprovodem nadrozměrného nákladu.' : '')
+        + ' Jde o orientační nezávazné nacenění. Částku musí PENTI potvrdit v cenové nabídce.';
+      posledniOdhad = o;
 
       var vym = nakresli(geo, z);
       ulozDoFormulare(z, o, vym);
@@ -422,6 +426,94 @@ document.addEventListener('DOMContentLoaded', function () {
       + '&body=' + encodeURIComponent(telo);
   }
 
+  function isoCas(d) {
+    var pad = function (n) { return String(n).padStart(2, '0'); };
+    var off = -d.getTimezoneOffset();
+    var sign = off >= 0 ? '+' : '-';
+    var abs = Math.abs(off);
+    var local = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 19);
+    return local + sign + pad(Math.floor(abs / 60)) + ':' + pad(abs % 60);
+  }
+  function sestavBalicek(formular) {
+    var z = sesbirej();
+    var jmeno = ((formular.querySelector('[name="jmeno"]') || {}).value || '').trim();
+    var email = ((formular.querySelector('[name="email"]') || {}).value || '').trim();
+    var telefon = ((formular.querySelector('[name="telefon"]') || {}).value || '').trim();
+    var obec = ((formular.querySelector('[name="lokalita"]') || {}).value || '').trim();
+    var tvar = z.roof === 'mansard' ? 'mansardova' : z.roof;
+    var povolene = { sedlova: 1, valbova: 1, pultova: 1, mansardova: 1, jina: 1 };
+    if (!povolene[tvar]) tvar = 'jina';
+    var pud = z.fp || 'jiny';
+    var now = isoCas(new Date());
+    var mapa = { '1': 'I', '2': 'II', '3': 'III', '4': 'IV', '5': 'V', '6': 'VI', '7': 'VII', '8': 'VIII' };
+    var maCenu = posledniOdhad && isFinite(posledniOdhad.od) && isFinite(posledniOdhad.do);
+    return {
+      schema_version: 'penti.inquiry.v1',
+      inquiry_id: crypto.randomUUID(),
+      draft_id: crypto.randomUUID(),
+      created_at: now,
+      locale: 'cs-CZ',
+      channel: 'web',
+      quality_score: 60,
+      utm: null,
+      intent: {
+        category: 'strecha',
+        job: 'novostavba',
+        services: ['konstrukce'],
+        structure: 'vaznik',
+        keep_existing_structure: null,
+        timber: null,
+        truss_spacing_mm: Math.round((z.roztec || 1) * 1000),
+        knee_wall: null
+      },
+      site: {
+        address: { line: obec, municipality: obec, postal_code: null, parcel: null, country: 'CZ' },
+        ruian_building_code: null,
+        snow_region: mapa[String(z.snehovaOblast)] || null,
+        wind_region: mapa[String(z.vetrnaOblast)] || null,
+        snow_load_kpa: null,
+        distance_to_plant_km: null
+      },
+      roof: {
+        shape: tvar,
+        plan_shape: pud,
+        width_m: z.dims.B || z.dims.A || null,
+        length_m: z.dims.A || null,
+        pitch_deg: z.slope || null,
+        pitch_upper_deg: null,
+        break_from_wall_m: null,
+        eave_overhang_m: z.presah,
+        gable_overhang_m: z.presah,
+        dormers_count: null,
+        attic_use: z.vyuzitiPodkrovi === 'obytne' ? 'obytne' : (z.vyuzitiPodkrovi === 'uloziste' ? 'puda' : 'nevyapene'),
+        insulation_interest: null,
+        covering: null,
+        gutters: null,
+        sheathing: null,
+        roof_windows_count: null,
+        snow_guards: false,
+        safety_points: false
+      },
+      estimate: {
+        kind: 'orientacni_vykaz',
+        area_m2: posledniOdhad ? posledniOdhad.plochaSikma : null,
+        ridge_m: null, eave_m: null, verge_m: null, hip_m: null, span_m: null, developed_width_m: null,
+        currency: 'CZK',
+        range_from_czk: maCenu ? Math.round(posledniOdhad.od) : null,
+        range_to_czk: maCenu ? Math.round(posledniOdhad.do) : null,
+        non_binding: maCenu,
+        manual_quote: true,
+        disclaimer: maCenu
+          ? 'Nejde o závaznou nabídku. Jde o orientační nezávazné nacenění. Částku musí PENTI potvrdit v cenové nabídce.'
+          : 'Nejde o závaznou nabídku. Cenu doplní rozpočtář.'
+      },
+      wanted_start_month: null,
+      note: (document.getElementById('f-odhad') || {}).value || null,
+      contact: { name: jmeno, email: email, phone: telefon, role: 'stavebnik', gdpr_consent_at: now },
+      attachments: []
+    };
+  }
+
   if (formular) formular.addEventListener('submit', function (e) {
     e.preventDefault();
     spocitej();                     // ať skrytá pole nesou i kontakt
@@ -434,16 +526,33 @@ document.addEventListener('DOMContentLoaded', function () {
          + 'kam poslat cenu.', 'var(--gold)');
       return;
     }
+    var gdpr = document.getElementById('w-gdpr');
+    if (!gdpr || !gdpr.checked) {
+      stav('Potvrďte souhlas se zpracováním údajů.', 'var(--gold)');
+      return;
+    }
+    var jmenoPole = (formular.querySelector('[name="jmeno"]') || {}).value || '';
+    if (jmenoPole.trim().length < 2) {
+      stav('Doplňte jméno.', 'var(--gold)');
+      return;
+    }
+    var obecPole = (formular.querySelector('[name="lokalita"]') || {}).value || '';
+    if (!obecPole.trim()) {
+      stav('Doplňte obec stavby.', 'var(--gold)');
+      return;
+    }
 
     stav('Odesíláme…');
-    /* Od 2. 9. 2026 se posílá i projektová dokumentace, proto FormData
-       bez ručně nastavené hlavičky — prohlížeč sám doplní multipart
-       s hranicí souborů. Netlify Forms tenhle formát přijímá. */
-    fetch('/api/poptavka', { method: 'POST', body: new FormData(formular) })
-      .then(function (r) {
-        if (!r.ok) throw new Error('server odpověděl ' + r.status);
+    fetch('/api/poptavka', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(sestavBalicek(formular))
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok || !res.d.ok) throw new Error((res.d.errors || []).join(' ') || 'server');
         stav('<strong style="color:var(--cream)">Poptávka odeslána.</strong> '
-           + 'Ozveme se do dvou pracovních dnů.', 'var(--muted)');
+           + 'Ozveme se s nabídkou. Částka z kalkulačky není závazná.', 'var(--muted)');
         var b = document.getElementById('res-odeslat');
         if (b) { b.disabled = true; b.textContent = 'Odesláno'; }
       })

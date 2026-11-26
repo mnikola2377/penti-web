@@ -165,8 +165,10 @@ export interface PentiInquiry {
     span_m: number | null;
     developed_width_m: number | null;
     currency: "CZK";
-    range_from_czk: null;
-    range_to_czk: null;
+    range_from_czk: number | null;
+    range_to_czk: number | null;
+    /** True jen když je v balíčku veřejný orientační odhad ceny. */
+    non_binding?: boolean;
     manual_quote: boolean;
     disclaimer: string;
   };
@@ -399,8 +401,19 @@ export function validateInquiry(input: unknown): { ok: true; inquiry: PentiInqui
   else {
     if (estimate.kind !== "orientacni_vykaz") errors.push("estimate.kind musí být orientacni_vykaz.");
     if (estimate.currency !== "CZK") errors.push("Měna musí být CZK.");
-    if (estimate.range_from_czk != null || estimate.range_to_czk != null) {
-      errors.push("Cenový rozsah zatím nezveřejňujeme. range_from_czk a range_to_czk musí být null.");
+    const hasRange = estimate.range_from_czk != null || estimate.range_to_czk != null;
+    if (hasRange) {
+      const from = estimate.range_from_czk;
+      const to = estimate.range_to_czk;
+      if (typeof from !== "number" || typeof to !== "number" || !Number.isInteger(from) || !Number.isInteger(to) || from < 0 || to < from) {
+        errors.push("Cenový rozsah musí být dvě celá čísla v korunách, od menšího k většímu.");
+      }
+      if (estimate.non_binding !== true) {
+        errors.push("Cenový odhad musí mít non_binding: true. Jde o orientační nezávazné nacenění.");
+      }
+      if (typeof estimate.disclaimer !== "string" || !estimate.disclaimer.includes("orientační nezávazné nacenění")) {
+        errors.push("U ceny musí disclaimer říct, že jde o orientační nezávazné nacenění.");
+      }
     }
     if (typeof estimate.disclaimer !== "string" || !estimate.disclaimer.includes("Nejde o závaznou nabídku")) {
       errors.push("Disclaimer musí říct, že nejde o závaznou nabídku.");
