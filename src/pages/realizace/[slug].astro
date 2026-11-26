@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import Foto from "../../components/Foto.astro";
+import SplitHeading from "../../components/SplitHeading.astro";
 import { chybiObec, chybiRozmer, realizace, realizacePodleSlug } from "../../data/foto";
 
 export function getStaticPaths() {
@@ -19,7 +20,7 @@ const description = `${item.title}. Fotografie práce PENTI PREFAB. Obec a rozm�
       <a href="/">Domů</a> / <a href="/realizace">Realizace</a> / {item.title}
     </p>
     <p class="eyebrow">{item.kind} · {item.year}</p>
-    <h1>{item.title}</h1>
+    <SplitHeading as="h1" text={item.title} />
     <p class="lead">{item.lead}</p>
     <dl class="missing-fields">
       <div>

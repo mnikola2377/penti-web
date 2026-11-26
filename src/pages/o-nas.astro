@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Foto from "../components/Foto.astro";
+import SplitHeading from "../components/SplitHeading.astro";
 import { company } from "../lib/company";
 import { historie } from "../data/foto";
 
@@ -22,7 +23,7 @@ const description =
   <article class="wrap page-hero">
     <p class="crumbs"><a href="/">Domů</a> / O nás</p>
     <p class="eyebrow">O nás</p>
-    <h1>Od krovů pradědečka po dnešní výrobu</h1>
+    <SplitHeading as="h1" text="Od krovů pradědečka po dnešní výrobu" />
     <p class="lead">
       {company.name} sídlí v {company.city}. Od roku {company.since} navrhujeme a dodáváme dřevěné střešní konstrukce. Navazujeme na firmu pradědečka Oskara Funtíčka. Lidi na historických fotkách nejmenujeme.
     </p>
@@ -33,7 +34,7 @@ const description =
           <li id={era.id}>
             <p class="timeline-label">{era.label}</p>
             <div>
-              <h2>{era.title}</h2>
+              <SplitHeading as="h2" text={era.title} />
               <p>{era.text}</p>
               <div class="timeline-photos">
                 {era.photos.map((photo) => (
@@ -48,14 +49,14 @@ const description =
       }
     </ol>
 
-    <h2>Jak pracujeme</h2>
+    <SplitHeading as="h2" text="Jak pracujeme" />
     <p>
       Používáme prověřené materiály a skladby. Levné výrobky do střechy nezabudováváme, protože z dlouhodobého hlediska vyjdou nejdráž. To je věta z našeho stávajícího webu a držíme se jí.
     </p>
     <p>
       Když chcete nabídku na střešní konstrukci, pošlete projekt a popište, co potřebujete. Když projekt není, stačí náčrt. Připravíme předběžný rozpočet, sejdeme se, stavbu zaměříme a po záloze zahájíme výrobu.
     </p>
-    <h2>Lidé ve firmě</h2>
+    <SplitHeading as="h2" text="Lidé ve firmě" />
     <ul>
       <li>Mgr. Michal Nikola, obchodní ředitel a majitel.</li>
       <li>Ing. Pavel Přikryl, obchod a cenové nabídky.</li>

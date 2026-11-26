@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Foto from "../components/Foto.astro";
 import KartaRealizace from "../components/KartaRealizace.astro";
+import SplitHeading from "../components/SplitHeading.astro";
 import { company } from "../lib/company";
 import { hero, realizace, sluzby } from "../data/foto";
 
@@ -25,7 +26,7 @@ const description =
     <div class="wrap hero-grid">
       <div>
         <p class="eyebrow">Ivanovice na Hané · od roku {company.since}</p>
-        <h1>Vyrábíme a realizujeme dřevěné konstrukce a střechy na klíč</h1>
+        <SplitHeading as="h1" text="Vyrábíme a realizujeme dřevěné konstrukce a střechy na klíč" />
         <hr class="gold-line" />
         <p class="lead">
           Vazníky, klasické krovy, krytinu, klempířské práce i panely dřevostaveb. Nabídku připravíme podle podkladů, které nám pošlete.
@@ -52,7 +53,7 @@ const description =
   <section class="section" aria-labelledby="sluzby">
     <div class="wrap">
       <p class="eyebrow">Co děláme</p>
-      <h2 id="sluzby">S čím se na nás můžete obrátit</h2>
+      <SplitHeading as="h2" id="sluzby" text="S čím se na nás můžete obrátit" />
       <div class="pillars">
         <a class="card card-media" href="/strechy/krovy">
           <Foto src={sluzby.konstrukce.src} alt={sluzby.konstrukce.alt} sizes="(min-width: 980px) 260px, 100vw" class="card-img" />
@@ -93,7 +94,7 @@ const description =
   <section class="section" aria-labelledby="postup">
     <div class="wrap">
       <p class="eyebrow">Postup</p>
-      <h2 id="postup">Jak zakázka probíhá</h2>
+      <SplitHeading as="h2" id="postup" text="Jak zakázka probíhá" />
       <ol class="steps">
         <li><span>01</span><h3>Poptávka</h3><p>Pošlete projekt nebo náčrt, adresu a napište, co potřebujete.</p></li>
         <li><span>02</span><h3>Rozpočet</h3><p>Připravíme předběžný rozpočet a sejdeme se nad ním.</p></li>
@@ -107,7 +108,7 @@ const description =
   <section class="section" aria-labelledby="reference">
     <div class="wrap">
       <p class="eyebrow">Realizace</p>
-      <h2 id="reference">Vybrané zakázky</h2>
+      <SplitHeading as="h2" id="reference" text="Vybrané zakázky" />
       <p>U fotek uvádíme typ práce a rok. Obec a rozměr doplníme, až je budeme znát.</p>
       <div class="refs">
         {realizace.filter((item) => item.featured).map((item) => <KartaRealizace item={item} />)}
@@ -120,7 +121,7 @@ const description =
     <div class="wrap trust">
       <div>
         <p class="eyebrow">Výroba</p>
-        <h2 id="duvera">Vlastní hala v Ivanovicích na Hané</h2>
+        <SplitHeading as="h2" id="duvera" text="Vlastní hala v Ivanovicích na Hané" />
         <p>Konstrukci staticky spočítáme a prvky řežeme na CNC pile. Na vazníky bereme sušené hoblované řezivo.</p>
         <p>Montujeme podle místa stavby. Orientační plochu střechy si spočítáte na webu. Cenu pošleme v nabídce.</p>
       </div>
@@ -137,7 +138,7 @@ const description =
     <div class="wrap">
       <div class="band">
         <div>
-          <h2>Chcete nabídku na střechu?</h2>
+          <SplitHeading as="h2" text="Chcete nabídku na střechu?" />
           <p>Vyplníte údaje o střeše. Rozpracovanou poptávku si prohlížeč pamatuje. Hned uvidíte orientační plochu a délky, cenu až v nabídce.</p>
         </div>
         <a class="btn btn-primary" href="/poptavka/strecha">Poptat střechu</a>

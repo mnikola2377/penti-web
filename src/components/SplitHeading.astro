@@ -1,0 +1,23 @@
+---
+import { splitHeading } from "../lib/heading";
+
+interface Props {
+  as?: "h1" | "h2";
+  text?: string;
+  light?: string;
+  strong?: string;
+  id?: string;
+  class?: string;
+}
+
+const { as: Tag = "h2", text = "", light, strong, id, class: className } = Astro.props;
+const parts =
+  light != null || strong != null
+    ? { light: light ?? "", strong: strong ?? "" }
+    : splitHeading(text);
+---
+
+<Tag id={id} class:list={["split-heading", className]}>
+  {parts.light ? <span class="light">{parts.light}</span> : null}
+  {parts.light ? " " : null}<strong>{parts.strong}</strong>
+</Tag>

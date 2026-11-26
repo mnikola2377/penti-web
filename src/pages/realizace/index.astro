@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import KartaRealizace from "../../components/KartaRealizace.astro";
+import SplitHeading from "../../components/SplitHeading.astro";
 import { realizace } from "../../data/foto";
 
 const description =
@@ -11,7 +12,7 @@ const description =
   <article class="wrap page-hero">
     <p class="crumbs"><a href="/">Domů</a> / Realizace</p>
     <p class="eyebrow">Realizace</p>
-    <h1>Práce podle fotek, které máme</h1>
+    <SplitHeading as="h1" text="Práce podle fotek, které máme" />
     <p class="lead">
       Karty jsou pojmenované podle typu práce a roku z podkladů. Obec a rozměr u nich záměrně chybí. Až je doplníte, zapíšou se do připravených polí.
     </p>

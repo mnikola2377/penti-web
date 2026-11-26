@@ -1,11 +1,12 @@
 ---
 import Base from "../../layouts/Base.astro";
+import SplitHeading from "../../components/SplitHeading.astro";
 const description = "Kalkulačky PENTI: výkaz střechy, orientační cena vazníků, krov a materiál. Ceny vazníků jsou odhad z obálky domu, ne nabídka.";
 ---
 <Base title="Kalkulačky" description={description} path="/kalkulatory">
   <article class="wrap page-hero">
     <p class="eyebrow">Kalkulačky</p>
-    <h1>Spočítejte si střechu nebo vazníky</h1>
+    <SplitHeading as="h1" text="Spočítejte si střechu nebo vazníky" />
     <p class="lead">Výkaz střechy cenu neukazuje. U vazníků uvidíte orientační rozpětí bez DPH. Závazná cena přijde v nabídce.</p>
     <div class="pillars">
       <a class="card" href="/poptavka/strecha"><h3>Střecha</h3><p>Tašky, latě, fólie, žlaby a svody. Když zvolíte krov, i výkaz řeziva.</p><span class="more">Otevřít</span></a>

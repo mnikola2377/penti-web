@@ -1,11 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
+import SplitHeading from "../components/SplitHeading.astro";
 import { company } from "../lib/company";
 ---
 <Base title="Lidé" description="Lidé ve firmě PENTI PREFAB: obchod, výroba a projekce. Kontakty z veřejného webu penti.cz." path="/lide">
   <article class="wrap page-hero">
     <p class="eyebrow">PENTI</p>
-    <h1>Lidé ve firmě</h1>
+    <SplitHeading as="h1" text="Lidé ve firmě" />
     <p class="lead">Jména a funkce jsou z kontaktů na penti.cz. Fotky týmu sem nedáváme, dokud je nebudeme mít se souhlasem.</p>
     <div class="team">
       {company.people.map((person) => (

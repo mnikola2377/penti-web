@@ -13,8 +13,9 @@
   background: var(--cream);
 }
 .kalk .subhero { background: #1b251e; color: #f6f1e7; }
-.kalk .subhero .c-cream,
-.kalk .t-h1 { color: #f6f1e7; font-family: "Purista", "Barlow", sans-serif; text-transform: none; letter-spacing: -0.01em; font-weight: 600; }
+.kalk .subhero .c-cream { color: #f6f1e7; }
+.kalk .t-h1.split-heading { color: #f6f1e7; max-width: 14em; }
+.kalk .t-h1.split-heading strong { color: inherit; }
 .kalk .c-gold,
 .kalk .t-label { color: #bf935b; }
 .kalk .c-muted,
