@@ -115,45 +115,6 @@ export const pages: SitePage[] = [
     cta: { href: "/poptavka/strecha", label: "Poptat krov" },
   },
   {
-    path: "strechy/pokryvacstvi",
-    title: "Pokrývačství",
-    description: "Pokrývačské práce PENTI PREFAB: latění nebo bednění, pojistná hydroizolace a pokládka krytiny na námi dodané i cizí konstrukce.",
-    eyebrow: "Pokrývačství",
-    heading: "Pokrývačské práce",
-    lead: "Krytinu pokládáme na konstrukce, které sami vyrobíme, i na střechy, kde konstrukce už stojí. Konkrétní skladbu a cenu určíme až z podkladů.",
-    serviceName: "Pokrývačské práce",
-    sections: [
-      {
-        heading: "Co práce zahrnuje",
-        bullets: [
-          "Latění nebo plné bednění podle typu krytiny a sklonu.",
-          "Pojistnou hydroizolaci.",
-          "Pokládku skládané nebo velkoformátové krytiny.",
-          "Hřeben, nároží a prostupy v rozsahu, který si domluvíme.",
-          "Přípravu pro klempířské prvky.",
-        ],
-      },
-      {
-        heading: "Co od vás potřebujeme",
-        paragraphs: [
-          "Adresu stavby, tvar a sklon střechy a představu o krytině. U rekonstrukce i fotografie. Výrobce krytiny vybereme v nabídce podle skladby, na těchto stránkách značky nejmenujeme.",
-        ],
-      },
-      {
-        heading: "Fólie a pásky v e-shopu",
-        paragraphs: [
-          "V e-shopu je jedna difuzní podstřešní fólie a těsnicí pásky pod kontralatě. Latě jsou u řeziva. Krytinu tam neprodáváme.",
-        ],
-        links: [
-          { href: "https://eshop-penti.netlify.app/#/obchod/folie", label: "Střešní fólie" },
-          { href: "https://eshop-penti.netlify.app/#/obchod/paska", label: "Těsnicí pásky" },
-          { href: "https://eshop-penti.netlify.app/#/obchod/wood", label: "Latě a další řezivo" },
-        ],
-      },
-    ],
-    cta: { href: "/poptavka/strecha", label: "Poptat pokrývačství" },
-  },
-  {
     path: "strechy/klempirstvi",
     title: "Klempířství",
     description: "Klempířské práce PENTI PREFAB: okapy, svody, lemování, úžlabí a oplechování prostupů. Součást střechy na klíč i samostatná zakázka.",

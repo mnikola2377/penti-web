@@ -228,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   var tvarKrytiny = null;      // doplní se z katalogu při prvním vykreslení
+  var krytinaZOdkazu = null;   // ?krytina=betonova|keramicka|plechova
 
   /* Tvar → materiál → model. Změna výše přenastaví vše níž, aby nemohla
      vzniknout kombinace, která neexistuje (třeba plochá plechová). */
@@ -245,6 +246,13 @@ document.addEventListener('DOMContentLoaded', function () {
       var popis = document.getElementById('w-tvar-popis');
       if (popis) popis.textContent = tvarInfoKrytiny(tvarKrytiny).popis || '';
       naplnSelect('w-material', tvarInfoKrytiny(tvarKrytiny).materialy);
+      if (uroven === 'vse' && krytinaZOdkazu) {
+        var selMat = document.getElementById('w-material');
+        if (selMat && selMat.querySelector('option[value="' + krytinaZOdkazu + '"]')) {
+          selMat.value = krytinaZOdkazu;
+        }
+        krytinaZOdkazu = null;
+      }
     }
 
     if (uroven !== 'model' && uroven !== 'povrch') {
@@ -957,6 +965,21 @@ document.addEventListener('DOMContentLoaded', function () {
      materiál". Kdybychom místo toho udělali druhou kopii stránky,
      dřív nebo později by se obě rozešly a nikdo by si toho nevšiml. */
   function predvolbaZOdkazu() {
+    var km = /(?:\?|&)krytina=(betonova|keramicka|plechova)(?:&|$)/.exec(location.search);
+    if (km) {
+      var mapaK = { betonova: 'betonová', keramicka: 'keramická', plechova: 'plechová' };
+      var prefer = { 'betonová': 'mirna_vlna', 'keramická': 'klasicka', 'plechová': 'plocha' };
+      krytinaZOdkazu = mapaK[km[1]];
+      var tvaryK = katalog().tvary || [];
+      var zvoleny = null;
+      for (var ti = 0; ti < tvaryK.length; ti++) {
+        var ma = (tvaryK[ti].materialy || []).some(function (x) { return x.kod === krytinaZOdkazu; });
+        if (!ma) continue;
+        if (!zvoleny) zvoleny = tvaryK[ti].kod;
+        if (tvaryK[ti].kod === prefer[krytinaZOdkazu]) { zvoleny = tvaryK[ti].kod; break; }
+      }
+      if (zvoleny) tvarKrytiny = zvoleny;
+    }
     /* Stránka Krov sem posílá odkazem `?vypocet=krov`. Je to tatáž
        kalkulačka — přepne se na klasický krov a skupiny střechy se
        odškrtnou, aby zákazník dostal jen dřevo. Odškrtnutí jde vzít

@@ -123,6 +123,16 @@ test("krov a materiál jsou předvolby téhož průvodce", async ({ page }) => {
   expect(errors, errors.join("\n")).toEqual([]);
 });
 
+test("odkaz krytina předvolí betonovou tašku", async ({ page }) => {
+  const errors = sbirejChyby(page);
+  await page.goto("/poptavka/strecha/?krytina=betonova");
+  await dalsi(page);
+  await dalsi(page);
+  await expect(page.locator("#w-material")).toHaveValue("betonová");
+  await expect(page.locator("#w-model")).toContainText("Bramac");
+  expect(errors, errors.join("\n")).toEqual([]);
+});
+
 test("vazník dojde k orientační ceně", async ({ page }, info) => {
   const errors = sbirejChyby(page);
   await page.goto("/kalkulatory/vaznik/");

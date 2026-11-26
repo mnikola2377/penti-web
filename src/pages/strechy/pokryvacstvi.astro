@@ -1,0 +1,365 @@
+---
+import Base from "../../layouts/Base.astro";
+import Foto from "../../components/Foto.astro";
+import SplitHeading from "../../components/SplitHeading.astro";
+import { company } from "../../lib/company";
+import bobrovka from "../../assets/foto/historie1-015.jpg";
+import beton from "../../assets/foto/krytina-beton-harzer.jpg";
+import plech from "../../assets/foto/krytina-plech-stehfalz.jpg";
+
+const description =
+  "Jak vybrat krytinu, kterou umí kalkulačka PENTI: betonová taška Bramac, pálená taška Bramac, Tondach a Erlus, falcovaný hliník, click panel a plechová taška Bella Sara. Sklon, hmotnost a skladba bez vymyšlených cen.";
+
+const faq = [
+  {
+    q: "Zadávám do kalkulačky rozměr zdiva, nebo střechy?",
+    a: "Venkovní rozměr zdiva, vnější líc obvodové zdi. Přesah u okapu a u štítu se zadává zvlášť a k ploše se přičte.",
+  },
+  {
+    q: "Unese starý krov betonovou tašku?",
+    a: "Bramac Classic váží kolem 37 až 40 kg na metr čtvereční krytiny. Pálená Renoton 14 začíná na 43,5 kg/m². Falcovaný hliník tloušťky 0,7 mm je řádově kolem 2 kg/m². Jestli to krov unese, řekne statika, ne tahle stránka.",
+  },
+  {
+    q: "Od jakého sklonu jde plech?",
+    a: "Dvojitá stojatá drážka má podle pravidel německého cechu pravidelný sklon 7° a nejnižší sklon 3° s doplňkovými opatřeními. PREFA u falcovaného hliníku uvádí minimum 3° a odkazuje na národní pravidla. Taška má bezpečný sklon podstatně výš.",
+  },
+  {
+    q: "Proč pod plech patří separační vrstva?",
+    a: "Na bednění z desek na bázi dřeva se mezi plech a bednění vkládá oddělovací vrstva. Strukturovaná vrstva odvede kondenzát a zároveň tlumí déšť a kroupy. U tašky na latích se řeší pojistná hydroizolace podle sklonu, ne stejná skladba jako u falcu.",
+  },
+  {
+    q: "Uvidím v kalkulačce cenu krytiny?",
+    a: "Ne. Kalkulačka spočítá výkaz, kolik čeho bude. Cenu v korunách doplní rozpočtář. Tady jsou jen skupiny, které kalkulačka opravdu nabízí.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@type": "Service",
+    name: "Pokrývačské práce",
+    serviceType: "Pokládka střešní krytiny",
+    description,
+    url: new URL("/strechy/pokryvacstvi", Astro.site).href,
+    provider: { "@id": "https://penti.cz/#firma" },
+    areaServed: { "@type": "Country", name: "Česko" },
+  },
+  {
+    "@type": "FAQPage",
+    mainEntity: faq.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  },
+];
+---
+
+<Base title="Jak vybrat střešní krytinu" description={description} path="/strechy/pokryvacstvi" jsonLd={jsonLd}>
+  <article class="wrap page-hero krytiny">
+    <p class="crumbs"><a href="/">Domů</a> / <a href="/strechy">Střechy</a> / Pokrývačství</p>
+    <p class="eyebrow">Pokrývačství</p>
+    <SplitHeading as="h1" light="Jak vybrat" strong="střešní krytinu" />
+    <p class="lead">
+      Kalkulačka střechy umí tři materiály: betonovou tašku, pálenou tašku a plech.
+      Jinou krytinu sem nepíšeme. Klempířské práce, žlaby a lemování, jsou
+      <a href="/strechy/klempirstvi">zvlášť</a>.
+    </p>
+    <p>
+      Čísla níže jsou z technických listů výrobců a z pravidel německého cechu pokrývačů.
+      Nejsou to sliby PENTI. Skladbu a sklon u vaší střechy posoudíme z projektu.
+      Navrhování střech v Česku řídí ČSN 73 1901, bezpečný sklon konkrétní tašky určuje výrobce.
+    </p>
+
+    <SplitHeading as="h2" light="Srovnání" strong="tří krytin" />
+    <div class="table-scroll">
+      <table class="compare">
+        <caption>Údaje platí pro uvedené modely, ne pro celý materiál obecně.</caption>
+        <thead>
+          <tr>
+            <th>Krytina</th>
+            <th>Hmotnost</th>
+            <th>Bezpečný sklon</th>
+            <th>Nejnižší sklon</th>
+            <th>Co to dělá s krovem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Betonová taška<br /><span>Bramac Classic</span></th>
+            <td>cca 3,75 kg/ks, kolem 37,5 kg/m²</td>
+            <td>22°</td>
+            <td>12° s doplňkovými opatřeními</td>
+            <td>Těžká skladaná krytina. Krov na ni musí být navržený.</td>
+          </tr>
+          <tr>
+            <th>Pálená taška<br /><span>Tondach Renoton 14</span></th>
+            <td>od 43,5 kg/m²</td>
+            <td>30°</td>
+            <td>20°</td>
+            <td>Podobná hmotnost jako beton, často o něco výš. Stejná starost o krov.</td>
+          </tr>
+          <tr>
+            <th>Falcovaný hliník<br /><span>pás 0,7 mm</span></th>
+            <td>kolem 2,2 kg/m²</td>
+            <td>7° pravidelný sklon dvojité drážky</td>
+            <td>3° s opatřeními</td>
+            <td>Lehká krytina na plném bednění. Řeší se kondenzát, ne tíha tašek.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">
+      Hmotnost a sklony: Bramac Classic podle technické příručky BMI platné od 1. 5. 2025 a podle listu EVROmat.
+      Renoton 14 podle technického listu Tondach / Wienerberger.
+      Plech: pravidelný a nejnižší sklon podle pravidel ZVDH pro dvojitou stojatou drážku, hmotnost podle PREFA FALZONAL 0,7 mm.
+      V kalkulačce je falcovaný hliník bez uvedené značky, číslo je řádová hmotnost tohoto typu.
+    </p>
+
+    <SplitHeading as="h2" light="Jak" strong="vybrat" />
+    <ol class="choose">
+      <li>
+        <h3>Sklon</h3>
+        <p>Pod 20° betonová ani pálená taška z kalkulačky není v bezpečném sklonu. Plech na drážku ano, ale pod 7° už s doplňkovými opatřeními. Nad 30° si můžete vybrat cokoli z téhle trojice.</p>
+      </li>
+      <li>
+        <h3>Krov a hmotnost</h3>
+        <p>Taška přidá desítky kilogramů na metr. Nový krov na to navrhneme. Starý krov nechte posoudit, než slíbíte beton místo lehkého šindele nebo plechu.</p>
+      </li>
+      <li>
+        <h3>Rozpočet</h3>
+        <p>Koruny sem nepíšeme, kalkulačka je taky neukáže. Betonová taška je obvykle střed, pálená výš, falcovaný hliník výš, click a taškový plech níž. Je to řazení, ne ceník. Číslo dá rozpočtář.</p>
+      </li>
+      <li>
+        <h3>Vzhled</h3>
+        <p>Beton v kalkulačce je Bramac s mírnou vlnou, nebo plochý Tegalit. Pálená je klasická vlna, plochá taška i velká vlna. Plech je hladký falc, click panel, nebo vlna Bella Sara.</p>
+      </li>
+      <li>
+        <h3>Hluk a kondenzát</h3>
+        <p>Těžká taška déšť tlumí hmotou. Plech na bednění bez strukturované vrstvy ho přenese do místnosti a kondenzát drží na rubu. Strukturovaná separace hluk i vodu pod plechem zlepší.</p>
+      </li>
+      <li>
+        <h3>Životnost</h3>
+        <p>U Renotonu uvádí Tondach životnost až 100 let. U betonu Bramac v citované příručce roky neuvádí, barva na povrchu stárne dřív než střep. U hliníkového pásu PREFA v citovaném listu roky taky nejsou, rozhoduje lak a to, jestli pod plechem stojí voda.</p>
+      </li>
+    </ol>
+
+    <section class="krytina" id="beton">
+      <SplitHeading as="h2" light="Betonová" strong="taška" />
+      <figure>
+        <Foto
+          src={beton}
+          alt="Červené betonové střešní tašky s vlnou, ilustrační snímek profilu Harzer Pfanne."
+          sizes="(min-width: 800px) 720px, 100vw"
+          widths={[640, 960, 1400]}
+        />
+        <figcaption>
+          Ilustrační betonová taška Harzer Pfanne. Není to zakázka PENTI ani model z kalkulačky.
+          Foto: Richard Huber, <a href="https://commons.wikimedia.org/wiki/File:Harzer_Pfanne_-_Gesamtbild.jpg">Wikimedia Commons</a>, CC BY-SA 3.0.
+        </figcaption>
+      </figure>
+      <p>
+        Betonová taška je směs písku, cementu, vody a pigmentu. Lisuje se a nechá vyzrát, nepálí se.
+        Barva je nástřik na povrchu. Bramac u Classic popisuje hladký povrch s dvojnásobným nástřikem disperzní barvy.
+      </p>
+      <p>
+        Classic váží cca 3,75 kg na kus. Při spotřebě cca 9,8 až 10,6 kusu na metr vychází EVROmat na 37,5 kg/m².
+        Tegalit je v téže příručce těžší, cca 5,2 kg na kus. Bezpečný sklon Classic je 22°, nejnižší 12°,
+        ale pod bezpečným sklonem už příručka chce doplňková opatření a větší překrytí.
+      </p>
+      <p>
+        Mrazuvzdornost a pevnost betonové tašky se v Evropě zkouší podle EN 490 a EN 491.
+        Déšť na tašce je tichý proti holému plechu, protože krytina má hmotu. Barva na povrchu časem zmatní,
+        beton pod ní zůstává. Na krov je to těžká krytina, podobně jako pálená.
+      </p>
+      <p>V kalkulačce jsou jen tyhle modely Bramac: Classic, Tegalit, MAX, Viva a Moravská taška Protector PLUS.</p>
+      <p class="actions">
+        <a class="btn btn-primary" href="/poptavka/strecha/?krytina=betonova">Spočítat betonovou tašku</a>
+      </p>
+    </section>
+
+    <section class="krytina" id="keramika">
+      <SplitHeading as="h2" light="Pálená" strong="taška" />
+      <figure>
+        <Foto
+          src={bobrovka}
+          alt="Hotová bobrovka na světlé budově s věží, rekonstrukce střechy předzámčí v Ivanovicích na Hané, 2007."
+          sizes="(min-width: 800px) 720px, 100vw"
+          widths={[640, 960, 1400]}
+        />
+        <figcaption>
+          Bobrovka z naší zakázky, rekonstrukce střechy předzámčí v Ivanovicích na Hané, 26. února 2007.
+          V kalkulačce bobrovka není. Jsou tam drážkové pálené tašky Bramac, Tondach a Erlus.
+        </figcaption>
+      </figure>
+      <p>
+        Pálená taška je hlína vypálená v peci. Barva je buď střep, nebo engoba a glazura na povrchu.
+        Tondach u Renotonu 14 uvádí hladký povrch, mrazuvzdornost a životnost až 100 let.
+        Tašky se v EU posuzují podle EN 1304.
+      </p>
+      <p>
+        Renoton 14 váží od 43,5 kg/m², bezpečný sklon má 30° a minimální 20°.
+        Renoton 11 je od 40 kg/m² se stejnými sklony. Pod bezpečným sklonem Tondach předepisuje těsnější doplňkovou hydroizolaci.
+        Měření krycí délky odkazuje na pravidla Cechu klempířů, pokrývačů a tesařů.
+      </p>
+      <p>
+        Proti betonu je pálená taška často dražší a barevně stálejší, když je engoba nebo glazura v celé vrstvě, ne jen nástřik.
+        Hmotnost je podobná, krov tedy neuleví. Déšť tlumí stejně jako beton, hmotou.
+      </p>
+      <p>
+        V kalkulačce: Bramac Granát 13 a 11, Topas 13, Rubín 9. Tondach Contiton 12, Planoton 11 a 14, Sensaton 11, Renoton 11 a 14.
+        A ERLUS Reformpfanne XXL.
+      </p>
+      <p class="actions">
+        <a class="btn btn-primary" href="/poptavka/strecha/?krytina=keramicka">Spočítat pálenou tašku</a>
+      </p>
+    </section>
+
+    <section class="krytina" id="plech">
+      <SplitHeading as="h2" light="Plech" strong="na střeše" />
+      <figure>
+        <Foto
+          src={plech}
+          alt="Tmavá falcovaná plechová krytina na kuželové stříšce, ilustrační snímek stojaté drážky."
+          sizes="(min-width: 800px) 720px, 100vw"
+          widths={[640, 800]}
+        />
+        <figcaption>
+          Ilustrační falcovaná krytina. Není to zakázka PENTI.
+          Foto: Uglyshingles, <a href="https://commons.wikimedia.org/wiki/File:ArborBay2.jpg">Wikimedia Commons</a>, public domain.
+        </figcaption>
+      </figure>
+      <p>
+        V kalkulačce jsou tři plechy. Falcovaná krytina z hliníku, click panel a tašková vlna Bella Sara od Budmatu.
+        Falc je pás skládaný na drážku na plném bednění. Click je panel, který se zacvakne. Bella Sara je plech lisovaný do vlny tašky.
+      </p>
+      <p>
+        Hliníkový pás tloušťky 0,7 mm váží u PREFA FALZONAL kolem 2,2 kg na metr hotové plochy. To je řádově dvacetkrát míň než taška.
+        Kalkulačka značku pásu neuvádí, berte to jako hmotnost tohoto typu, ne jako váhu konkrétní role.
+        Kilogramy Bella Sary a click panelu bez jejich listu sem nepíšeme.
+      </p>
+      <p>
+        Německá pravidla ZVDH dávají dvojité stojaté drážce pravidelný sklon 7° a nejnižší sklon 3°.
+        Pod pravidelným sklonem se přidává těsnění drážky, vyšší drážka nebo těsné podstřeší.
+        PREFA u svého falcovaného hliníku uvádí minimum 3° a říká, ať se dodrží národní pravidla a separace podle podkladu.
+      </p>
+      <p>
+        Plech na bednění z desek potřebuje oddělovací vrstvu. Na rubu se sráží voda a bez mezery plech i dřevo trpí.
+        Strukturovaná vrstva vodu odvede a zároveň ztlumí déšť a kroupy. Bez ní je plechová střecha v podkroví hlučnější než taška.
+        U tašky se kondenzát řeší větranou mezerou a pojistnou fólií, ne stejnou skladbou.
+      </p>
+      <p>
+        Falc drží barvu lakem z válcovny. Když lak odejde, hliník dál nerezaví jako ocel, ale vzhled už není nový.
+        Ocelová taška Bella Sara rezaví, jakmile je v laku díra. To je důvod, proč se u plechu hlídá poškrábání při montáži.
+      </p>
+      <p>
+        V e-shopu krytinu neprodáváme. Prodáváme
+        <a href={`${company.eshop}#/obchod/folie`}>difuzní fólii</a>
+        a <a href={`${company.eshop}#/obchod/paska`}>těsnicí pásky pod kontralatě</a>.
+        Latě jsou u <a href={`${company.eshop}#/obchod/wood`}>řeziva</a>.
+      </p>
+      <p class="actions">
+        <a class="btn btn-primary" href="/poptavka/strecha/?krytina=plechova">Spočítat plech</a>
+      </p>
+    </section>
+
+    <SplitHeading as="h2" light="Časté" strong="otázky" />
+    <div class="faq">
+      {faq.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <SplitHeading as="h2" light="Zdroje" strong="k číslům" />
+    <ol class="sources">
+      <li>
+        BMI Bramac, technická příručka betonových a keramických tašek, platnost od 1. 5. 2025.
+        Classic: cca 3,75 kg/ks, spotřeba cca 9,8–10,6 ks/m², bezpečný sklon 22°, minimální 12°.
+        Tegalit: cca 5,2 kg/ks.
+      </li>
+      <li>
+        EVROmat, produkt Bramac Classic: 3,75 kg/ks (37,5 kg/m²), bezpečný sklon 22°, minimální 12° s doplňkovými opatřeními.
+        <a href="https://www.evromat.cz/produkty/produkt/bramac-classic">evromat.cz</a>
+      </li>
+      <li>
+        Wienerberger / Tondach, technický list Renoton 14: hmotnost od 43,5 kg/m², bezpečný sklon 30°, minimální 20°, životnost až 100 let.
+        Renoton 11: od 40 kg/m², stejné sklony. List odkazuje na pravidla CKPT pro rozměření krytiny.
+      </li>
+      <li>
+        EN 1304 pro pálené tašky, EN 490 a EN 491 pro betonové tašky. ČSN 73 1901 pro navrhování střech. Z listů výše neopisujeme výsledky konkrétní zkoušky, jen kterou normu krytina používá.
+      </li>
+      <li>
+        Zentralverband des Deutschen Dachdeckerhandwerks, Fachregeln für Metallarbeiten: dvojitá stojatá drážka, pravidelný sklon 7°, nejnižší sklon 3°, pod 7° doplňková opatření. Do 15° u titanzinku strukturovaná separace. Oddělovací vrstva na deskách na bázi dřeva.
+        Přehled pravidel cituje i pro clima, „Regensichernde Zusatzmaßnahmen“ (stav pravidel od dubna 2024).
+      </li>
+      <li>
+        PREFA, FALZONAL, hliník 0,7 mm: efektivní spotřeba cca 2,19 kg/m² u šířky 600 mm, minimální sklon 3°, separace podle národních pravidel.
+        <a href="https://www.prefa.de/produkt-katalog/dachsysteme/falzonal-r/">prefa.de</a>
+      </li>
+    </ol>
+    <p class="note">
+      Fotka betonové tašky: Richard Huber, CC BY-SA 3.0. Fotka falcu: Uglyshingles, public domain. Bobrovka je naše, z roku 2007.
+    </p>
+  </article>
+</Base>
+
+<style>
+  .krytiny .table-scroll {
+    overflow-x: auto;
+    margin: 0 0 12px;
+    max-width: 100%;
+  }
+  .krytiny .compare {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    background: var(--bila);
+    color: var(--ink);
+  }
+  .krytiny .compare caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: 8px 0 0;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+  .krytiny .compare th,
+  .krytiny .compare td {
+    border-bottom: 1px solid var(--linka);
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .krytiny .compare thead th { font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .krytiny .compare span { display: block; font-weight: 500; color: var(--ink-muted); font-size: 14px; }
+  .krytiny .choose {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+    margin: 0 0 28px;
+  }
+  .krytiny .choose li {
+    background: var(--bila);
+    border-top: 2px solid var(--zlata);
+    padding: 16px;
+  }
+  .krytiny .krytina { margin: 36px 0; }
+  .krytiny figure { margin: 0 0 16px; }
+  .krytiny figcaption { margin-top: 8px; font-size: 14px; color: var(--ink-muted); max-width: 68ch; }
+  .krytiny .actions { margin-top: 8px; }
+  .krytiny .faq details {
+    background: var(--bila);
+    border-bottom: 1px solid var(--linka);
+    padding: 12px 16px;
+  }
+  .krytiny .faq summary { cursor: pointer; font-weight: 700; }
+  .krytiny .sources { max-width: 72ch; }
+  .krytiny .note { color: var(--ink-muted); font-size: 15px; }
+  @media (max-width: 800px) {
+    .krytiny .choose { grid-template-columns: 1fr; }
+  }
+</style>
