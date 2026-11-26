@@ -135,29 +135,29 @@ export const stranky: Record<string, Foto[]> = {
 export const realizace: Realizace[] = [
   {
     slug: "prihradove-vazniky-2017-2023",
-    title: "Příhradové vazníky – zastřešení vstupu do domu",
+    title: "Příhradové vazníky – zastřešení autoservisu ve Zvonovicích",
     year: "2017–2023",
     kind: "Příhradové vazníky",
-    lead: "Vyrábíme v Ivanovicích na Hané. Na snímcích je montáž příhradových vazníků zastřešení vstupu do domu.",
-    vyroba: "Ivanovice na Hané",
+    lead: "Vyrábíme v Ivanovicích na Hané. Na snímcích je montáž příhradových vazníků pro zastřešení autoservisu ve Zvonovicích.",
+    obec: "Zvonovice",
     rozmer: null,
     featured: true,
     cover: {
       src: vaznikyNebe,
-      alt: "Montáž příhradových vazníků zastřešení vstupu do domu, pohled zespodu proti obloze, 2017–2023.",
+      alt: "Montáž příhradových vazníků pro zastřešení autoservisu ve Zvonovicích, pohled zespodu proti obloze, 2017–2023.",
     },
     photos: [
       {
         src: vaznikyNebe,
-        alt: "Příhradové vazníky zastřešení vstupu do domu na betonovém věnci, 2017–2023.",
+        alt: "Příhradové vazníky pro zastřešení autoservisu ve Zvonovicích na betonovém věnci, 2017–2023.",
       },
       {
         src: vaznikJerab,
-        alt: "Hydraulická ruka zvedá příhradový vazník při zastřešení vstupu do domu, 2017–2023.",
+        alt: "Hydraulická ruka zvedá příhradový vazník při zastřešení autoservisu ve Zvonovicích, 2017–2023.",
       },
       {
         src: podkrovi,
-        alt: "Příhradové vazníky, záklopy a střešní okna u zastřešení vstupu do domu, 2017–2023.",
+        alt: "Příhradové vazníky, záklopy a střešní okna u zastřešení autoservisu ve Zvonovicích, 2017–2023.",
       },
     ],
   },
@@ -420,11 +420,11 @@ export const historie: Obdobi[] = [
     id: "dnes",
     label: "Dnes",
     title: "Vazníky, krovy a pergoly",
-    text: "Vyrábíme v Ivanovicích na Hané. Na snímcích je montáž příhradových vazníků zastřešení vstupu do domu, 2017–2023. Pergola je z 9. září 2025.",
+    text: "Vyrábíme v Ivanovicích na Hané. Na snímcích je montáž příhradových vazníků pro zastřešení autoservisu ve Zvonovicích, 2017–2023. Pergola je z 9. září 2025.",
     photos: [
       {
         src: vaznikyNebe,
-        alt: "Montáž příhradových vazníků zastřešení vstupu do domu, 2017–2023. Výroba je v Ivanovicích na Hané.",
+        alt: "Montáž příhradových vazníků pro zastřešení autoservisu ve Zvonovicích, 2017–2023.",
       },
       {
         src: pergola,
