@@ -1,0 +1,26 @@
+---
+import Base from "../../layouts/Base.astro";
+import fragment from "../../kalkulacka/vaznik-body.html?raw";
+import "../../styles/kalkulacka.css";
+
+const description =
+  "Orientační cena příhradových vazníků PENTI bez DPH. Rozpětí z rozměrů domu, ne závazná nabídka. Sazby dodal vlastník webu.";
+---
+
+<Base title="Kalkulátor vazníků" description={description} path="/kalkulatory/vaznik">
+  <div class="kalk" set:html={fragment} />
+  <script is:inline src="/js/penti/penti-engine.js"></script>
+  <script is:inline src="/js/penti/penti-sazby-web.js"></script>
+  <script is:inline src="/js/penti/penti-vaznik-web.js"></script>
+  <script is:inline src="/js/penti/penti-kresba-web.js"></script>
+  <script is:inline src="/js/penti/kalkulacka-vaznik.js"></script>
+  <script is:inline src="/js/penti/penti-wizard.js"></script>
+  <script is:inline>
+    function pdToggle(r) {
+      var b = r.closest(".pd-blok");
+      if (!b) return;
+      var s = b.querySelector(".pd-soubory");
+      if (s) s.style.display = r.value === "ano" && r.checked ? "block" : "none";
+    }
+  </script>
+</Base>

@@ -1,0 +1,13 @@
+---
+import Base from "../../layouts/Base.astro";
+import SplitHeading from "../../components/SplitHeading.astro";
+import { company } from "../../lib/company";
+---
+<Base title="Kalkulátor materiálu" description="Výkaz materiálu na střechu PENTI: tašky, latě, fólie, bednění a okapy. Bez montáže, bez ceny." path="/kalkulatory/material">
+  <article class="wrap page-hero">
+    <p class="eyebrow">Kalkulačky</p>
+    <SplitHeading as="h1" text="Materiál na střechu" />
+    <p class="lead">Stejný výkaz jako u kalkulátoru střechy, přednastavený na dodávku jen materiálu. Řezivo, fólie, pásky a spojovací materiál, které máme skladem, jsou v <a href={company.eshop} rel="noopener noreferrer">e-shopu</a>. BSH a LVL tam nejsou, ty poptáte s krovem nebo vazníkem.</p>
+    <p><a class="btn btn-primary" href="/poptavka/strecha?poptavka=material">Spočítat materiál</a></p>
+  </article>
+</Base>

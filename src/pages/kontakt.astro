@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import SimpleForm from "../components/SimpleForm.astro";
+import SplitHeading from "../components/SplitHeading.astro";
 import { company } from "../lib/company";
 ---
 
@@ -11,11 +12,11 @@ import { company } from "../lib/company";
 >
   <article class="wrap page-hero">
     <p class="eyebrow">Kontakt</p>
-    <h1>Ozvěte se</h1>
+    <SplitHeading as="h1" text="Ozvěte se" />
     <p class="lead">Na střechu je nejrychlejší konfigurátor. Obecný dotaz pošlete sem, nebo rovnou na e-mail.</p>
     <div class="team">
       <section class="card">
-        <h2>Sídlo</h2>
+        <SplitHeading as="h2" text="Sídlo" />
         <p>
           {company.name}<br />
           {company.street}<br />
@@ -34,7 +35,7 @@ import { company } from "../lib/company";
         <p><a href={company.reservio}>Nezávazná schůzka přes Reservio</a></p>
       </section>
       <section class="card">
-        <h2>Lidé</h2>
+        <SplitHeading as="h2" text="Lidé" />
         {
           company.people.map((person) => (
             <p>
@@ -52,7 +53,7 @@ import { company } from "../lib/company";
         }
       </section>
     </div>
-    <h2>Napsat zprávu</h2>
+    <SplitHeading as="h2" text="Napsat zprávu" />
     <SimpleForm kind="kontakt" submitLabel="Odeslat zprávu" messageLabel="Zpráva" />
   </article>
 </Base>

@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import SimpleForm from "../components/SimpleForm.astro";
+import SplitHeading from "../components/SplitHeading.astro";
 import { company } from "../lib/company";
 ---
 
@@ -11,12 +12,12 @@ import { company } from "../lib/company";
 >
   <article class="wrap page-hero">
     <p class="eyebrow">Kariéra</p>
-    <h1>Řemeslo v Ivanovicích na Hané</h1>
+    <SplitHeading as="h1" text="Řemeslo v Ivanovicích na Hané" />
     <p class="lead">
       Na stávajícím webu teď nemáme otevřenou konkrétní pozici. Když vás práce u nás zajímá, napište. Výroba je v hale na adrese {company.street}, {company.city}.
     </p>
     <p class="notice">Konkrétní inzerát doplníme, až ho budeme mít. Do té doby sbíráme jen jméno, telefon a řemeslo, bez životopisu.</p>
-    <h2>Koho rádi poznáme</h2>
+    <SplitHeading as="h2" text="Koho rádi poznáme" />
     <ul>
       <li>Tesaře na montáže krovů a vazníků.</li>
       <li>Pokrývače a klempíře na střechy, které nově děláme i my.</li>

@@ -1,0 +1,64 @@
+---
+import Base from "../layouts/Base.astro";
+import Foto from "../components/Foto.astro";
+import SplitHeading from "../components/SplitHeading.astro";
+import { company } from "../lib/company";
+import { historie } from "../data/foto";
+
+const description =
+  "Historie PENTI PREFAB: firma pradědečka Oskara Funtíčka, počátky v 90. letech, rekonstrukce střechy předzámčí v roce 2007, Vincentinum ve Šternberku 2011–2012, věšadlový krov ve Slavkově u Brna 2014, altán v Bukovince 2016 a dnešní výroba v Ivanovicích na Hané.";
+---
+
+<Base
+  title="O nás"
+  description={description}
+  path="/o-nas"
+  jsonLd={{
+    "@type": "AboutPage",
+    name: "O nás",
+    url: new URL("/o-nas", Astro.site).href,
+    about: { "@id": "https://penti.cz/#firma" },
+  }}
+>
+  <article class="wrap page-hero">
+    <p class="crumbs"><a href="/">Domů</a> / O nás</p>
+    <p class="eyebrow">O nás</p>
+    <SplitHeading as="h1" text="Od krovů pradědečka po dnešní výrobu" />
+    <p class="lead">
+      {company.name} sídlí v {company.city}. Od roku {company.since} navrhujeme a dodáváme dřevěné střešní konstrukce. Navazujeme na firmu pradědečka Oskara Funtíčka. Lidi na historických fotkách nejmenujeme.
+    </p>
+
+    <ol class="timeline">
+      {
+        historie.map((era) => (
+          <li id={era.id}>
+            <p class="timeline-label">{era.label}</p>
+            <div>
+              <SplitHeading as="h2" text={era.title} />
+              <p>{era.text}</p>
+              <div class="timeline-photos">
+                {era.photos.map((photo) => (
+                  <figure>
+                    <Foto src={photo.src} alt={photo.alt} sizes="(min-width: 800px) 360px, 100vw" />
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <SplitHeading as="h2" light="Jak" strong="pracujeme" />
+    <p>Používáme prověřené materiály a skladby. Levné výrobky do střechy nezabudováváme, protože z dlouhodobého hlediska vyjdou nejdráž.</p>
+    <p>Když chcete nabídku na střešní konstrukci, pošlete projekt a popište, co potřebujete. Když projekt není, stačí náčrt. Připravíme předběžný rozpočet, sejdeme se, stavbu zaměříme a po záloze zahájíme výrobu.</p>
+    <SplitHeading as="h2" text="Lidé ve firmě" />
+    <ul>
+      <li>Mgr. Michal Nikola, obchodní ředitel a majitel.</li>
+      <li>Ing. Pavel Přikryl, obchod a cenové nabídky.</li>
+      <li>René Menšík, vedoucí výroby a montáží.</li>
+      <li>Ing. Ondřej Čuma, hlavní projektant.</li>
+    </ul>
+    <p><a class="btn btn-primary" href="/kontakt">Kontakt</a></p>
+  </article>
+</Base>

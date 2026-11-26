@@ -1,11 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
+import SplitHeading from "../components/SplitHeading.astro";
 ---
 
 <Base title="Stránka nenalezena" description="Tahle adresa na webu PENTI PREFAB není. Vraťte se na úvod, nebo spočítejte střechu." path="/404">
   <article class="wrap page-hero">
     <p class="eyebrow">404</p>
-    <h1>Tuhle stránku nemáme</h1>
+    <SplitHeading as="h1" text="Tuhle stránku nemáme" />
     <p class="lead">Odkaz je starý, nebo je v něm překlep. Úvod a poptávka střechy fungují.</p>
     <p>
       <a class="btn btn-primary" href="/">Na úvod</a>

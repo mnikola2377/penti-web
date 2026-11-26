@@ -93,6 +93,19 @@ test("cenový rozsah a chybějící fotka u rekonstrukce neprojdou", () => {
   const price = validateInquiry(withPrice);
   assert.equal(price.ok, false);
 
+  const flagged = {
+    ...inquiry,
+    estimate: {
+      ...inquiry.estimate,
+      range_from_czk: 180000,
+      range_to_czk: 240000,
+      non_binding: true,
+      disclaimer: "Nejde o závaznou nabídku. Jde o orientační nezávazné nacenění. Částku musí PENTI potvrdit v cenové nabídce.",
+    },
+  };
+  const allowed = validateInquiry(flagged);
+  assert.equal(allowed.ok, true, allowed.ok ? "" : allowed.errors.join(" "));
+
   const withoutPhoto = { ...inquiry, attachments: [] };
   const photo = validateInquiry(withoutPhoto);
   assert.equal(photo.ok, false);

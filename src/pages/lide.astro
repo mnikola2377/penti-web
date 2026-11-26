@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import SplitHeading from "../components/SplitHeading.astro";
+import { company } from "../lib/company";
+---
+<Base title="Lidé" description="Lidé ve firmě PENTI PREFAB: obchod, výroba a projekce. Kontakty z veřejného webu penti.cz." path="/lide">
+  <article class="wrap page-hero">
+    <p class="eyebrow">PENTI</p>
+    <SplitHeading as="h1" text="Lidé ve firmě" />
+    <p class="lead">Jména a funkce jsou z kontaktů na penti.cz. Fotky týmu sem nedáváme, dokud je nebudeme mít se souhlasem.</p>
+    <div class="team">
+      {company.people.map((person) => (
+        <section class="card">
+          <h2>{person.name}</h2>
+          <p>{person.role}</p>
+          <p><a href={`mailto:${person.email}`}>{person.email}</a></p>
+          {"phoneDisplay" in person && person.phoneDisplay ? <p><a href={`tel:${person.phoneTel}`}>{person.phoneDisplay}</a></p> : null}
+        </section>
+      ))}
+    </div>
+  </article>
+</Base>

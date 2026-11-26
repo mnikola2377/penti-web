@@ -1,0 +1,333 @@
+<div class="subhero">
+  <div class="container">
+    <div class="subhero-inner">
+      <div class="breadcrumb">
+        <a href="/">Domů</a><span class="breadcrumb-sep">›</span>
+        <a href="/kalkulatory">Kalkulátory</a><span class="breadcrumb-sep">›</span>
+        <span style="color:var(--gold);">Příhradové vazníky</span>
+      </div>
+      <div class="subhero-eyebrow t-label c-gold">Interaktivní kalkulátor</div>
+      <h1 class="t-h1 c-cream split-heading"><span class="light">Kalkulátor</span> <strong>příhradových vazníků</strong></h1>
+      <p class="t-lead c-muted" style="margin-top:14px;max-width:560px;">Orientační výpočet počtu vazníků, spotřeby materiálu a ceny. Výsledek obdržíte okamžitě.</p>
+    </div>
+  </div>
+</div>
+
+<section class="section bg-cream">
+  <div class="container">
+    <!-- Netlify Forms. Do 28. 8. 2026 kontaktní pole v kalkulačce vůbec
+         neměla `name` a nikam se neodesílala — zákazník je vyplnil, viděl
+         „Děkujeme" a nikomu nic nepřišlo. Skryté pole `strecha` nese celé
+         zadání ve strojově čitelné podobě, aby ho rozpočtář mohl otevřít
+         v profi rozpočtu a nemusel rozměry přepisovat z e-mailu. -->
+    <form name="poptavka-vazniky" method="POST" data-netlify="true" enctype="multipart/form-data"
+          netlify-honeypot="bot-pole" action="/kalkulatory/vaznik">
+      <input type="hidden" name="form-name" value="poptavka-vazniky">
+      <p style="display:none;"><label>Nevyplňujte: <input name="bot-pole"></label></p>
+      <input type="hidden" name="strecha" id="f-strecha">
+      <input type="hidden" name="odhad" id="f-odhad">
+    <div class="layout-2col">
+
+      <!-- WIZARD -->
+      <div id="calc-wizard">
+        <div class="progress-bar"><div class="progress-fill" style="width:25%;"></div></div>
+        <div class="wizard-steps">
+          <div class="wizard-step active"><span class="wizard-step-num">01</span>Střecha</div>
+          <div class="wizard-step"><span class="wizard-step-num">02</span>Parametry</div>
+          <div class="wizard-step"><span class="wizard-step-num">03</span>Oblast</div>
+        </div>
+
+        <!-- Panel 1 -->
+        <div class="wizard-panel active">
+          <h3 class="t-h3" style="margin-bottom:32px;">Jaký tvar střechy plánujete?</h3>
+          <div class="wizard-2col" style="margin-bottom:32px;">
+            <label style="cursor:pointer;">
+              <input type="radio" name="tvar" value="sedlova" style="accent-color:var(--gold);margin-right:8px;" checked>
+              <span style="font-family:Purista,serif;font-weight:600;font-size:.9rem;">Sedlová</span>
+              <div style="font-size:.8rem;color:var(--muted);margin-top:4px;margin-left:24px;">Dva shodné svahy, přímý hřeben</div>
+            </label>
+            <label style="cursor:pointer;">
+              <input type="radio" name="tvar" value="valbova" style="accent-color:var(--gold);margin-right:8px;">
+              <span style="font-family:Purista,serif;font-weight:600;font-size:.9rem;">Valbová</span>
+              <div style="font-size:.8rem;color:var(--muted);margin-top:4px;margin-left:24px;">Čtyři svahy, zkrácený hřeben</div>
+            </label>
+            <label style="cursor:pointer;">
+              <input type="radio" name="tvar" value="pultova" style="accent-color:var(--gold);margin-right:8px;">
+              <span style="font-family:Purista,serif;font-weight:600;font-size:.9rem;">Pultová</span>
+              <div style="font-size:.8rem;color:var(--muted);margin-top:4px;margin-left:24px;">Jeden skloněný svah</div>
+            </label>
+            <label style="cursor:pointer;">
+              <input type="radio" name="tvar" value="mansard" style="accent-color:var(--gold);margin-right:8px;">
+              <span style="font-family:Purista,serif;font-weight:600;font-size:.9rem;">Mansardová</span>
+              <div style="font-size:.8rem;color:var(--muted);margin-top:4px;margin-left:24px;">Dvojitý sklon, max. podkroví — spočítáme ručně</div>
+            </label>
+          </div>
+          <div class="wizard-nav">
+            <span></span>
+            <button type="button" class="btn btn-gold" data-wizard-next>Dále →</button>
+          </div>
+        </div>
+
+        <!-- Panel 2 -->
+        <div class="wizard-panel">
+          <h3 class="t-h3" style="margin-bottom:32px;">Rozměry a sklon střechy</h3>
+          <!-- TVAR PŮDORYSU. Zadání PENTI 28. 8. 2026: kalkulačka má umět
+               i složitější tvary. Výpočet je zná odjakživa — chybělo jen
+               rozhraní. Rozměrová pole se podle tvaru překreslí. -->
+          <div class="wizard-field-group">
+            <label class="wizard-label">Tvar půdorysu</label>
+            <div id="w-tvary" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+          </div>
+
+          <!-- SCHÉMA PŮDORYSU. Z názvu pole („boční rameno – šířka") si
+               člověk nevybaví, která strana to je. Vedle polí proto běží
+               obrázek a strana, jejíž pole má zákazník pod rukou, se
+               rozsvítí. -->
+          <div class="layout-2col" style="--bok:300px;--mezera:28px">
+            <div>
+              <p class="rozmer-napoveda">Bez přesahů střechy, ty zadáte níže. Měří se vnější líc obvodového zdiva.</p>
+              <div class="wizard-2col" id="w-rozmery"></div>
+            </div>
+            <div>
+              <div id="w-schema"></div>
+              <div style="font-size:.75rem;color:var(--muted);margin-top:8px;">
+                Klikněte do pole a příslušná strana se v obrázku zvýrazní. Schéma je zdivo, bez přesahů.
+              </div>
+            </div>
+          </div>
+
+          <!-- KONCE RAMEN. U L, T, U a lichoběžníku není samo o sobě jasné,
+               jestli je konec ramene štít, nebo valba — a je v tom velký
+               rozdíl v ploše i ceně. Ptáme se proto rovnou. -->
+          <div class="wizard-field-group" id="w-konce-box" style="display:none;">
+            <label class="wizard-label">Konce ramen</label>
+            <div id="w-konce" style="display:flex;flex-direction:column;gap:8px;"></div>
+          </div>
+
+          <div class="wizard-2col">
+            <div class="wizard-field-group">
+              <label class="wizard-label">Sklon střechy (°) *</label>
+              <input class="wizard-input" type="number" id="w-sklon" min="5" max="60" value="30">
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label">Rozteč vazníků (m)</label>
+              <select class="wizard-select" id="w-roztech">
+                <option value="0.8">0,8 m – hustá</option>
+                <option value="0.9">0,9 m</option>
+                <option value="1" selected>1,0 m – standardní</option>
+                <option value="1.1">1,1 m</option>
+                <option value="1.2">1,2 m – ekonomická</option>
+              </select>
+              <div id="roztec-pozn" style="font-size:.78rem;color:var(--gold);margin-top:8px;display:none;"></div>
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label" for="w-presah">Přesah u okapu (m)</label>
+              <input class="wizard-input" type="number" id="w-presah" min="0" max="2" step="0.1" value="0.6">
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label" for="w-stit">Přesah u štítu (m)</label>
+              <input class="wizard-input" type="number" id="w-stit" min="0" max="2" step="0.1" value="0.6">
+              <p class="rozmer-napoveda">Oba přesahy se přičtou k venkovnímu zdivu. Cena vazníku je ze šikmé plochy střechy včetně nich.</p>
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label">Vzdálenost stavby od výrobny (km)</label>
+              <input class="wizard-input" type="number" id="w-km" min="0" max="500" step="5" value="70">
+            </div>
+          </div>
+          <div class="wizard-nav">
+            <button type="button" class="btn btn-outline-ink btn-sm" data-wizard-prev>← Zpět</button>
+            <button type="button" class="btn btn-gold" data-wizard-next>Dále →</button>
+          </div>
+        </div>
+
+        <!-- Panel 3 -->
+        <div class="wizard-panel">
+          <h3 class="t-h3" style="margin-bottom:12px;">Lokalizace a specifika</h3>
+          <p class="t-body" style="margin-bottom:28px;color:var(--muted);">Tyhle údaje potřebuje statik pro návrh vazníku. Na orientační cenu vliv nemají — pošleme je ale rovnou s poptávkou, ať se nemusíte ptát dvakrát.</p>
+          <div class="wizard-2col">
+            <div class="wizard-field-group">
+              <label class="wizard-label">Sněhová oblast</label>
+              <select class="wizard-select" id="w-sneh">
+                <option value="1">I. — 0,7 kPa</option>
+                <option value="2" selected>II. — 1,0 kPa</option>
+                <option value="3">III. — 1,5 kPa</option>
+                <option value="4">IV. — 2,0 kPa</option>
+                <option value="5">V. — 2,5 kPa</option>
+                <option value="6">VI. — 3,0 kPa</option>
+                <option value="7">VII. — 4,0 kPa</option>
+                <option value="8">VIII. — nad 4 kPa</option>
+              </select>
+              <div style="font-size:.8rem;margin-top:6px;">
+                <a href="https://clima-maps.info/snehovamapa/" target="_blank" rel="noopener"
+                   style="color:var(--gold);text-decoration:underline">Nevíte? Najdete na mapě →</a>
+              </div>
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label">Větrná oblast</label>
+              <select class="wizard-select" id="w-vitr">
+                <option value="1">I.</option>
+                <option value="2" selected>II.</option>
+                <option value="3">III.</option>
+                <option value="4">IV.</option>
+                <option value="5">V.</option>
+              </select>
+            </div>
+            <div class="wizard-field-group" style="grid-column:1/-1;">
+              <label class="wizard-label">Plánované využití podkroví</label>
+              <select class="wizard-select" id="w-vyuziti">
+                <option value="nevytapene">Nevytápěné, neobytné</option>
+                <option value="uloziste">Úložiště / půda</option>
+                <option value="obytne">Obytné podkroví</option>
+              </select>
+            </div>
+          </div>
+          <div class="wizard-nav">
+            <button type="button" class="btn btn-outline-ink btn-sm" data-wizard-prev>← Zpět</button>
+            <button type="button" class="btn btn-gold" data-wizard-next data-wizard-vysledek>Spočítat →</button>
+          </div>
+        </div>
+
+      </div><!-- /wizard -->
+
+      <!-- INFO PANEL -->
+      <div style="position:sticky;top:calc(var(--nav-h) + 24px);">
+        <div style="background:var(--charcoal);padding:36px;">
+          <div class="t-label c-gold" style="margin-bottom:16px;">Potřebujete poradit?</div>
+          <p class="t-body" style="color:rgba(247,245,241,.5);margin-bottom:24px;">Kalkulátor je orientační. Pro přesný výpočet s certifikátem kontaktujte naše projektanty.</p>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <a href="tel:+420735987377" class="btn btn-outline-cream btn-sm" style="justify-content:flex-start;gap:10px;">
+              <svg viewBox="0 0 24 24" width="14" height="14"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 0112 18.85a19.5 19.5 0 01-6.93-7.07A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              +420 735 987 377
+            </a>
+            <a href="/kontakt" class="btn btn-gold btn-sm">Nezávazná poptávka</a>
+          </div>
+          <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border-l);">
+            <div class="t-label" style="color:var(--muted);margin-bottom:12px;">Proč přesná výroba?</div>
+            <div class="spec-grid" style="gap:1px;background:rgba(247,245,241,.05);">
+              <div style="background:var(--charcoal2);padding:12px 16px;display:flex;justify-content:space-between;">
+                <span style="font-size:.75rem;color:var(--muted);">Norma řeziva</span>
+                <span style="font-family:Purista,serif;font-weight:600;font-size:.8rem;color:var(--cream);">ČSN EN 14081</span>
+              </div>
+              <div style="background:var(--charcoal2);padding:12px 16px;display:flex;justify-content:space-between;">
+                <span style="font-size:.75rem;color:var(--muted);">Pevnost</span>
+                <span style="font-family:Purista,serif;font-weight:600;font-size:.8rem;color:var(--cream);">C24</span>
+              </div>
+              <div style="background:var(--charcoal2);padding:12px 16px;display:flex;justify-content:space-between;">
+                <span style="font-size:.75rem;color:var(--muted);">Tolerance rozměrů</span>
+                <span style="font-family:Purista,serif;font-weight:600;font-size:.8rem;color:var(--cream);">± 2 mm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VÝSLEDEK -->
+    <div class="calc-result" id="calc-result">
+      <div class="section-eyebrow t-label c-gold" style="margin-bottom:20px;">Orientační odhad</div>
+      <h3 class="t-h3 c-cream" style="margin-bottom:24px;">Vaše střecha</h3>
+
+      <!-- KRESBA. Čísla v tabulce si laik nepředstaví, obrázek ano — a když
+           mu tvar nesedí, opraví zadání dřív, než pošle poptávku. Kreslí se
+           ze stejné geometrie, ze které se počítá cena, takže se to nemůže
+           rozejít. -->
+      <div class="layout-2col" style="--bok:1fr;--mezera:32px;margin-bottom:36px">
+        <div>
+          <div id="res-kresba"></div>
+        </div>
+        <div>
+          <div class="t-label" style="color:var(--muted);margin-bottom:12px;">Délky hran</div>
+          <div id="res-hrany" style="font-size:.85rem;"></div>
+        </div>
+      </div>
+      <div class="calc-result-grid">
+        <div class="calc-result-item">
+          <div class="calc-result-val" id="res-vaznik">–</div>
+          <div class="calc-result-label">Počet vazníků (ks)</div>
+        </div>
+        <div class="calc-result-item">
+          <div class="calc-result-val" id="res-plocha">–</div>
+          <div class="calc-result-label">Plocha střechy</div>
+        </div>
+        <div class="calc-result-item">
+          <div class="calc-result-val" id="res-vaznik-rozmer">–</div>
+          <div class="calc-result-label">Největší vazník (d × v)</div>
+        </div>
+      </div>
+      <!-- Cena je rozpětí, ne jedno číslo. Jedno konkrétní číslo svádí
+           k tomu, aby nás u něj zákazník držel; rozpětí říká pravdu o tom,
+           co odhad z obálky domu umí. -->
+      <div style="margin-top:36px;padding-top:28px;border-top:1px solid var(--border-l);">
+        <div class="calc-result-label" style="margin-bottom:10px;">Orientační cena bez DPH</div>
+        <div class="calc-result-val cena-rozpeti" id="res-cena">–</div>
+        <p id="cena-upozorneni" style="margin:12px 0 0;font-size:.95rem;line-height:1.5;color:#f6f1e7;">Jde o orientační nezávazné nacenění. Částku musí PENTI potvrdit v cenové nabídce.</p>
+        <div id="res-pozn" style="font-size:.8rem;color:var(--muted);margin-top:10px;"></div>
+      </div>
+      <div class="info-box" style="margin-top:24px;">
+        <p><strong>Co odhad neví:</strong> vikýře, prostupy, dostupnost stavby ani výsledek statiky.
+        Jde o orientační nezávazné nacenění. Částku musí PENTI potvrdit v cenové nabídce.</p>
+      </div>
+      <!-- ── KONTAKT AŽ ZA VÝSLEDKEM ──────────────────────────────────
+           Do 2. 9. 2026 byl kontakt čtvrtým krokem průvodce, PŘED
+           výsledkem. Text sice říkal „nepovinné", ale krok se jmenoval
+           Kontakt a stál v cestě. Kalkulátor střechy to má obráceně —
+           výkaz hned, kontakt pod ním — a tak je to i tady. -->
+      <div style="margin-top:32px;padding-top:28px;border-top:1px solid rgba(247,245,241,.15);">
+        <h3 class="t-h3 c-cream" style="margin-bottom:8px;">Kam vám máme poslat přesnou cenu?</h3>
+        <p class="t-body" style="margin-bottom:20px;color:rgba(247,245,241,.7);">Odhad výše je váš. S kontaktem vám spočítáme cenu na míru z vašeho projektu, ne z obálky domu. Stačí e-mail nebo telefon.</p>
+
+        <!-- ── PROJEKTOVÁ DOKUMENTACE ─────────────────────────────────────
+             PENTI 2. 9. 2026: před osobními údaji se zeptat, jestli má
+             zákazník projekt, a říct mu, co přiložit. Nabídka z projektu
+             je přesná; bez něj se počítá z obálky domu. Soubory posílá
+             Netlify Forms (max. 8 MB na soubor); na větší je e-mail. -->
+        <div class="pd-blok" style="margin-bottom:24px;">
+          <label class="wizard-label" style="color:rgba(247,245,241,.85)">Máte projektovou dokumentaci?</label>
+          <div style="display:flex;gap:18px;flex-wrap:wrap;margin:6px 0 10px;font-size:.95rem;">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;color:rgba(247,245,241,.9);"><input type="radio" name="ma-dokumentaci" value="ano" style="accent-color:var(--gold)" onchange="pdToggle(this)"> Ano, přiložím ji</label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;color:rgba(247,245,241,.9);"><input type="radio" name="ma-dokumentaci" value="ne" style="accent-color:var(--gold)" onchange="pdToggle(this)" checked> Zatím ne</label>
+          </div>
+          <div class="pd-soubory" style="display:none;">
+            <p style="font-size:.88rem;color:rgba(247,245,241,.7);margin:0 0 8px;">Přiložte, co máte — čím víc, tím přesnější nabídka:</p>
+            <ul style="font-size:.88rem;color:rgba(247,245,241,.7);margin:0 0 12px 18px;padding:0;line-height:1.6;"><li>půdorys posledního podlaží</li><li>půdorys krovu</li><li>půdorys střechy</li><li>řezy</li><li>pohledy</li><li>technická zpráva</li><li>skladby střechy (pokud nejsou ve výkresech)</li></ul>
+            <input class="wizard-input" type="file" name="dokumentace-1" accept=".pdf,.jpg,.jpeg,.png,.zip,.dwg" style="margin-bottom:8px;">
+            <input class="wizard-input" type="file" name="dokumentace-2" accept=".pdf,.jpg,.jpeg,.png,.zip,.dwg" style="margin-bottom:8px;">
+            <input class="wizard-input" type="file" name="dokumentace-3" accept=".pdf,.jpg,.jpeg,.png,.zip,.dwg" style="margin-bottom:8px;">
+            <p style="font-size:.8rem;color:rgba(247,245,241,.7);margin:4px 0 0;">PDF, fotky nebo ZIP, do 8 MB na soubor. Větší pošlete na <a href="mailto:poptavky@penti.cz" style="color:var(--gold)">poptavky@penti.cz</a>.</p>
+          </div>
+        </div>
+        <div class="wizard-2col">
+            <div class="wizard-field-group">
+              <label class="wizard-label" style="color:rgba(247,245,241,.85)">Jméno</label>
+              <input class="wizard-input" type="text" name="jmeno" placeholder="Jan Novák">
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label" style="color:rgba(247,245,241,.85)">E-mail</label>
+              <input class="wizard-input" type="email" name="email" placeholder="jan@novak.cz">
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label" style="color:rgba(247,245,241,.85)">Telefon</label>
+              <input class="wizard-input" type="tel" name="telefon" placeholder="+420 777 000 000">
+            </div>
+            <div class="wizard-field-group">
+              <label class="wizard-label" style="color:rgba(247,245,241,.85)">Obec stavby</label>
+              <input class="wizard-input" type="text" name="lokalita" placeholder="Bystřice pod Hostýnem">
+            </div>
+          </div>
+      </div>
+      <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+        <label style="display:flex;gap:10px;align-items:flex-start;margin:0 0 16px;font-size:.95rem;color:#f6f1e7;width:100%;">
+          <input type="checkbox" id="w-gdpr" style="margin-top:4px">
+          <span>Souhlasím se zpracováním údajů pro přípravu nabídky. Více v <a href="/ochrana-udaju">zásadách</a>.</span>
+        </label>
+        <button type="submit" class="btn btn-gold" id="res-odeslat">Chci nabídku</button>
+        <a href="tel:+420735987377" class="btn btn-outline-cream btn-sm">+420 735 987 377</a>
+      </div>
+      <!-- Sem se vypíše, jestli poptávka odešla, nebo proč ne. Tiché
+           tlačítko, po kterém se nic nestane, je horší než chybová hláška. -->
+      <div id="res-stav" style="margin-top:16px;font-size:.9rem;display:none;"></div>
+    </div>
+    </form>
+  </div>
+</section>

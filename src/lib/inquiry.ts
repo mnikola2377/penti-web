@@ -16,7 +16,7 @@ export const STRUCTURES = ["vaznik", "krov", "hotova"] as const;
 export const ATTIC = ["nevyapene", "puda", "obytne"] as const;
 export const ROLES = ["stavebnik", "projektant", "firma"] as const;
 export const SHAPES: RoofShape[] = ["sedlova", "valbova", "pultova", "mansardova", "jina"];
-export const PLANS: PlanShape[] = ["obdelnik", "jiny"];
+export const PLANS: PlanShape[] = ["obdelnik", "ctverec", "L", "T", "U", "lichobeznik", "jiny", "vlastni"];
 export const COVERINGS = [
   "betonova_taska",
   "palena_taska",
@@ -136,6 +136,7 @@ export interface PentiInquiry {
     pitch_deg: number | null;
     pitch_upper_deg: number | null;
     break_from_wall_m: number | null;
+    dimensions_basis?: "outer_masonry";
     eave_overhang_m: number | null;
     gable_overhang_m: number | null;
     dormers_count: number | null;
@@ -165,8 +166,10 @@ export interface PentiInquiry {
     span_m: number | null;
     developed_width_m: number | null;
     currency: "CZK";
-    range_from_czk: null;
-    range_to_czk: null;
+    range_from_czk: number | null;
+    range_to_czk: number | null;
+    /** True jen když je v balíčku veřejný orientační odhad ceny. */
+    non_binding?: boolean;
     manual_quote: boolean;
     disclaimer: string;
   };
@@ -370,13 +373,17 @@ export function validateInquiry(input: unknown): { ok: true; inquiry: PentiInqui
   else {
     if (typeof address.line !== "string" || address.line.trim().length < 2) errors.push("Doplňte ulici a číslo stavby.");
     if (typeof address.municipality !== "string" || address.municipality.trim().length < 2) errors.push("Doplňte obec.");
-    if (typeof address.postal_code !== "string" || !normalizePostal(address.postal_code)) errors.push("PSČ musí mít pět číslic.");
+    if (address.postal_code != null && address.postal_code !== "" && (typeof address.postal_code !== "string" || !normalizePostal(address.postal_code))) {
+      errors.push("PSČ musí mít pět číslic, nebo zůstat prázdné.");
+    }
     if (address.country !== "CZ") errors.push("country musí být CZ.");
   }
   if (site) {
     if (site.snow_region != null && !includes(SNOW, site.snow_region)) errors.push("Sněhová oblast není platná.");
     if (site.wind_region != null && !includes(WIND, site.wind_region)) errors.push("Větrná oblast není platná.");
-    if (site.snow_load_kpa != null) errors.push("snow_load_kpa v této verzi necháváme null. Zatížení dopočítá projektant.");
+    if (site.snow_load_kpa != null && (typeof site.snow_load_kpa !== "number" || site.snow_load_kpa <= 0)) {
+      errors.push("snow_load_kpa musí být kladné číslo, nebo null.");
+    }
     if (site.distance_to_plant_km != null) errors.push("distance_to_plant_km dopočítáme až z mapy, teď musí být null.");
   }
 
@@ -395,8 +402,19 @@ export function validateInquiry(input: unknown): { ok: true; inquiry: PentiInqui
   else {
     if (estimate.kind !== "orientacni_vykaz") errors.push("estimate.kind musí být orientacni_vykaz.");
     if (estimate.currency !== "CZK") errors.push("Měna musí být CZK.");
-    if (estimate.range_from_czk != null || estimate.range_to_czk != null) {
-      errors.push("Cenový rozsah zatím nezveřejňujeme. range_from_czk a range_to_czk musí být null.");
+    const hasRange = estimate.range_from_czk != null || estimate.range_to_czk != null;
+    if (hasRange) {
+      const from = estimate.range_from_czk;
+      const to = estimate.range_to_czk;
+      if (typeof from !== "number" || typeof to !== "number" || !Number.isInteger(from) || !Number.isInteger(to) || from < 0 || to < from) {
+        errors.push("Cenový rozsah musí být dvě celá čísla v korunách, od menšího k většímu.");
+      }
+      if (estimate.non_binding !== true) {
+        errors.push("Cenový odhad musí mít non_binding: true. Jde o orientační nezávazné nacenění.");
+      }
+      if (typeof estimate.disclaimer !== "string" || !estimate.disclaimer.includes("orientační nezávazné nacenění")) {
+        errors.push("U ceny musí disclaimer říct, že jde o orientační nezávazné nacenění.");
+      }
     }
     if (typeof estimate.disclaimer !== "string" || !estimate.disclaimer.includes("Nejde o závaznou nabídku")) {
       errors.push("Disclaimer musí říct, že nejde o závaznou nabídku.");
@@ -407,8 +425,11 @@ export function validateInquiry(input: unknown): { ok: true; inquiry: PentiInqui
   if (!contact) errors.push("Chybí kontakt.");
   else {
     if (typeof contact.name !== "string" || contact.name.trim().length < 2) errors.push("Doplňte jméno.");
-    if (typeof contact.email !== "string" || !EMAIL.test(contact.email.trim())) errors.push("E-mail nemá platný tvar.");
-    if (typeof contact.phone !== "string" || phoneDigits(contact.phone).length < 9) errors.push("Telefon potřebuje alespoň 9 číslic.");
+    const email = typeof contact.email === "string" ? contact.email.trim() : "";
+    const phone = typeof contact.phone === "string" ? contact.phone : "";
+    if (!email && phoneDigits(phone).length < 9) errors.push("Doplňte e-mail, nebo telefon s alespoň 9 číslicemi.");
+    if (email && !EMAIL.test(email)) errors.push("E-mail nemá platný tvar.");
+    if (phoneDigits(phone).length > 0 && phoneDigits(phone).length < 9) errors.push("Telefon potřebuje alespoň 9 číslic.");
     if (!includes(ROLES, contact.role)) errors.push("Vyberte roli.");
     if (typeof contact.gdpr_consent_at !== "string" || !OFFSET.test(contact.gdpr_consent_at)) {
       errors.push("Chybí čas souhlasu se zpracováním údajů.");

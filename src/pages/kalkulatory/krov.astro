@@ -1,0 +1,12 @@
+---
+import Base from "../../layouts/Base.astro";
+import SplitHeading from "../../components/SplitHeading.astro";
+---
+<Base title="Kalkulátor krovu" description="Kalkulátor klasického krovu PENTI. Profily navrhuje statika, výkaz je orientační a není to posudek ke stavebnímu povolení." path="/kalkulatory/krov">
+  <article class="wrap page-hero">
+    <p class="eyebrow">Kalkulačky</p>
+    <SplitHeading as="h1" text="Kalkulátor krovu" />
+    <p class="lead">Zadáte tvar střechy, sklon a soustavu. Dostanete výkaz prvků. Rozměry hranolů nezadáváte, navrhneme je podle statiky. Není to posudek autorizovaného statika ke stavebnímu povolení.</p>
+    <p><a class="btn btn-primary" href="/poptavka/strecha?vypocet=krov">Spočítat krov</a></p>
+  </article>
+</Base>

@@ -6,7 +6,7 @@ const current = Astro.url.pathname;
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="/" aria-label="PENTI PREFAB, úvod">
-      <img class="logo" src="/brand/penti-logo-vodorovne-barevne.svg" width="597" height="114" alt="PENTI PREFAB" />
+      <img class="logo" src="/brand/penti-logo-vodorovne-barevne-negativ.svg" width="597" height="114" alt="PENTI PREFAB" />
     </a>
     <a class="header-phone" href={`tel:${company.phoneTel}`}>
       <span class="phone-full">{company.phoneDisplay}</span>
@@ -21,7 +21,11 @@ const current = Astro.url.pathname;
           {
             nav.map((item) => (
               <li class="nav-item">
-                <a href={item.href} aria-current={current === item.href ? "page" : undefined}>
+                <a
+                  href={item.href}
+                  aria-current={!("external" in item) && current === item.href ? "page" : undefined}
+                  rel={"external" in item ? "noopener noreferrer" : undefined}
+                >
                   {item.label}
                 </a>
                 {"children" in item && item.children ? (
@@ -40,7 +44,7 @@ const current = Astro.url.pathname;
           }
         </ul>
       </nav>
-      <a class="btn btn-primary" href="/poptavka/strecha">Spočítat střechu</a>
+      <a class="btn btn-primary" href="/poptavka/strecha">Poptat střechu</a>
     </div>
   </div>
 </header>

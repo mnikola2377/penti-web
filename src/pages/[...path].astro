@@ -1,6 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
+import Foto from "../components/Foto.astro";
+import SplitHeading from "../components/SplitHeading.astro";
 import { getPage, pages } from "../data/pages";
+import { stranky } from "../data/foto";
 
 export function getStaticPaths() {
   return pages.map((page) => ({ params: { path: page.path } }));
@@ -45,14 +48,25 @@ const jsonLd = page.serviceName
       }
     </p>
     <p class="eyebrow">{page.eyebrow}</p>
-    <h1>{page.heading}</h1>
+    <SplitHeading as="h1" text={page.heading} />
     <p class="lead">{page.lead}</p>
     {page.notice && <p class="notice">{page.notice}</p>}
+    {
+      (stranky[page.path] ?? []).length > 0 && (
+        <div class="gallery gallery-intro">
+          {stranky[page.path].map((photo) => (
+            <figure>
+              <Foto src={photo.src} alt={photo.alt} sizes="(min-width: 800px) 480px, 100vw" />
+            </figure>
+          ))}
+        </div>
+      )
+    }
     <div class="prose">
       {
         page.sections.map((section) => (
           <section>
-            <h2>{section.heading}</h2>
+            <SplitHeading as="h2" text={section.heading} />
             {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
             {section.bullets && (
               <ul>
@@ -65,7 +79,7 @@ const jsonLd = page.serviceName
               <ul>
                 {section.links.map((link) => (
                   <li>
-                    <a href={link.href}>{link.label}</a>
+                    <a href={link.href} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>{link.label}</a>
                   </li>
                 ))}
               </ul>

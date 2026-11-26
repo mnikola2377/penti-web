@@ -18,6 +18,7 @@ export const company = {
   instagram: "https://www.instagram.com/pentiprefab/",
   facebook: "https://www.facebook.com/pentiprefab",
   reservio: "https://penti-prefab-s-r-o.reservio.com/",
+  eshop: "https://eshop-penti.netlify.app/",
   gtmId: "GTM-NXDXJL6X",
   people: [
     {
@@ -49,6 +50,14 @@ export const company = {
   ],
 } as const;
 
+/** Skupiny, které e-shop opravdu má. Ceny a počty kusů sem nepatří. */
+export const eshopLinks = [
+  { label: "Řezivo", note: "KVH, DUO/TRIO, fošny, prkna, latě a OSB", href: `${company.eshop}#/obchod/wood` },
+  { label: "Střešní fólie", note: "Difuzní fólie", href: `${company.eshop}#/obchod/folie` },
+  { label: "Těsnicí program", note: "Pásky pod kontralatě", href: `${company.eshop}#/obchod/paska` },
+  { label: "Spojovací materiál", note: "Vruty, kotvy, úhelníky a hřebíky", href: `${company.eshop}#/obchod/spojovaci` },
+] as const;
+
 export const nav = [
   {
     label: "Střechy",
@@ -71,6 +80,18 @@ export const nav = [
     ],
   },
   { label: "Realizace", href: "/realizace" },
+  {
+    label: "Kalkulačky",
+    href: "/kalkulatory",
+    children: [
+      { label: "Střecha", href: "/poptavka/strecha" },
+      { label: "Vazníky", href: "/kalkulatory/vaznik" },
+      { label: "Krov", href: "/kalkulatory/krov" },
+      { label: "Materiál", href: "/kalkulatory/material" },
+      { label: "Dřevostavba", href: "/kalkulatory/drevostav" },
+    ],
+  },
+  { label: "E-shop", href: "https://eshop-penti.netlify.app/", external: true },
   { label: "Poradna", href: "/poradna" },
   {
     label: "O nás",
@@ -79,6 +100,7 @@ export const nav = [
       { label: "O firmě", href: "/o-nas" },
       { label: "Výroba", href: "/vyroba" },
       { label: "Technologie", href: "/technologie" },
+      { label: "Lidé", href: "/lide" },
       { label: "Kontakt", href: "/kontakt" },
     ],
   },
