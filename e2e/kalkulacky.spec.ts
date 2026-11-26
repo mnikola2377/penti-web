@@ -63,6 +63,7 @@ test("střecha: chybějící rozměr zastaví krok a pak jde až k odeslání", 
   await page.locator(".wizard-panel.active [data-wizard-vysledek]").click();
 
   await expect(page.locator("#calc-result")).toHaveClass(/show/);
+  await expect(page.locator("#res-nadpis")).toBeInViewport();
   await expect(page.locator("#res-vykaz")).not.toBeEmpty();
   await expect(page.locator("#res-nadpis")).not.toHaveText("Nepodařilo se spočítat");
 
@@ -106,7 +107,7 @@ test("krov a materiál jsou předvolby téhož průvodce", async ({ page }) => {
   await expect(page.locator("#w-krov-box")).toBeVisible();
   await page.locator(".wizard-panel.active [data-wizard-vysledek]").click();
   await expect(page.locator("#calc-result")).toHaveClass(/show/);
-  await expect(page.locator("#res-krov")).toBeVisible();
+  await expect(page.locator("#res-krov")).toBeInViewport();
 
   await page.goto("/poptavka/strecha/?poptavka=material");
   await expect(page.locator(".t-lead")).toContainText("jen materiál");
@@ -116,12 +117,13 @@ test("krov a materiál jsou předvolby téhož průvodce", async ({ page }) => {
   await expect(page.locator("#w-rozsah")).toHaveValue("jen_material");
   await page.locator(".wizard-panel.active [data-wizard-vysledek]").click();
   await expect(page.locator("#calc-result")).toHaveClass(/show/);
+  await expect(page.locator("#res-podnadpis")).toBeInViewport();
   await expect(page.locator("#res-podnadpis")).toContainText("jen materiál");
 
   expect(errors, errors.join("\n")).toEqual([]);
 });
 
-test("vazník dojde k orientační ceně", async ({ page }) => {
+test("vazník dojde k orientační ceně", async ({ page }, info) => {
   const errors = sbirejChyby(page);
   await page.goto("/kalkulatory/vaznik/");
   await expect(page.locator(".wizard-panel.active")).toContainText("Jaký tvar");
@@ -136,10 +138,37 @@ test("vazník dojde k orientační ceně", async ({ page }) => {
   await page.locator("#w-dim-A").fill("12");
   await dalsi(page);
   await expect(page.locator("#w-sneh")).toBeVisible();
-  await page.locator(".wizard-panel.active [data-wizard-vysledek]").click();
+  const spocitat = page.getByRole("button", { name: "Spočítat" });
+  await expect(spocitat).toBeVisible();
+  await spocitat.click();
   await expect(page.locator("#calc-result")).toHaveClass(/show/);
+  await expect(page.locator("#res-cena")).toBeInViewport();
   await expect(page.locator("#res-cena")).toContainText("Kč");
+  await expect(page.locator("#cena-upozorneni")).toBeInViewport();
   await expect(page.locator("#cena-upozorneni")).toContainText("orientační nezávazné nacenění");
   await expect(page.locator("#res-pozn")).toContainText("orientační nezávazné nacenění");
+
+  if (info.project.name === "desktop") {
+    await page.locator("[name=jmeno]").fill("TEST poptávka vazníky – nevolat");
+    await page.locator("[name=email]").fill("test-penti@example.com");
+    await page.locator("[name=lokalita]").fill("TEST obec");
+    await page.locator("#w-gdpr").check();
+    const response = page.waitForResponse(
+      (res) => res.url().includes("/api/poptavka") && res.request().method() === "POST",
+    );
+    await page.locator("#res-odeslat").click();
+    const res = await response;
+    const payload = res.request().postDataJSON() as {
+      contact?: { name?: string };
+      roof?: { dimensions_basis?: string; eave_overhang_m?: number; gable_overhang_m?: number };
+    };
+    expect(payload.contact?.name).toContain("TEST");
+    expect(payload.roof?.dimensions_basis).toBe("outer_masonry");
+    expect(payload.roof?.eave_overhang_m).toBe(0.6);
+    expect(payload.roof?.gable_overhang_m).toBe(0.6);
+    expect(res.ok(), await res.text()).toBeTruthy();
+    await expect(page.locator("#res-stav")).toContainText("Poptávka odeslána");
+  }
+
   expect(errors, errors.join("\n")).toEqual([]);
 });

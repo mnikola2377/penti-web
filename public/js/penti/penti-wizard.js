@@ -105,6 +105,14 @@
       var result = document.getElementById("calc-result");
       if (!result) return;
       result.classList.add("show");
+      /* Cena je až pod nákresem a na úzkém okně ještě pod bočním panelem.
+         Bez posunu vypadá kliknutí na „Spočítat“, jako by nic neudělalo. */
+      var cena = document.getElementById("res-cena");
+      var cil = cena && result.contains(cena) ? cena : result;
+      var plynule = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.requestAnimationFrame(function () {
+        cil.scrollIntoView({ behavior: plynule ? "smooth" : "auto", block: "center" });
+      });
     }
 
     var tlacitkaDalsi = wizard.querySelectorAll("[data-wizard-next]");
