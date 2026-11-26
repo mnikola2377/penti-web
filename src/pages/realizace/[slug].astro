@@ -11,7 +11,7 @@ export function getStaticPaths() {
 const item = realizacePodleSlug(Astro.params.slug);
 if (!item) throw new Error("Realizace chybí");
 
-const description = item.obec
+const description = item.obec || item.vyroba
   ? `${item.title}. ${item.lead}`
   : `${item.title}. Fotografie práce PENTI PREFAB. Obec a rozměr zatím nejsou doplněné.`;
 ---
@@ -26,8 +26,8 @@ const description = item.obec
     <p class="lead">{item.lead}</p>
     <dl class="missing-fields">
       <div>
-        <dt>Obec</dt>
-        <dd>{item.obec ?? chybiObec}</dd>
+        <dt>{item.vyroba ? "Výroba" : "Obec"}</dt>
+        <dd>{item.vyroba ?? item.obec ?? chybiObec}</dd>
       </div>
       {
         item.rozmer !== null && (

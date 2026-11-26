@@ -38,6 +38,8 @@ export interface Realizace {
   featured: boolean;
   /** Když chybí, na kartě zůstane „Doplní firma“. */
   obec?: string;
+  /** Místo výroby, ne místo stavby. Když je vyplněné, místo obce se ukáže „Výroba“. */
+  vyroba?: string;
   /** null = rozměr neuvádět. Když chybí, na kartě zůstane „Doplní firma“. */
   rozmer?: string | null;
 }
@@ -133,27 +135,29 @@ export const stranky: Record<string, Foto[]> = {
 export const realizace: Realizace[] = [
   {
     slug: "prihradove-vazniky-2017-2023",
-    title: "Příhradové vazníky, 2017–2023",
+    title: "Příhradové vazníky – zastřešení vstupu do domu",
     year: "2017–2023",
     kind: "Příhradové vazníky",
-    lead: "Montáž příhradových vazníků z alba zakázek mezi lety 2017 a 2023. Jednotlivé roky u fotek v podkladech nejsou, proto uvádíme celé rozpětí.",
+    lead: "Vyrábíme v Ivanovicích na Hané. Na snímcích je montáž příhradových vazníků zastřešení vstupu do domu.",
+    vyroba: "Ivanovice na Hané",
+    rozmer: null,
     featured: true,
     cover: {
       src: vaznikyNebe,
-      alt: "Příhradové vazníky osazené na věnci, pohled zespodu proti obloze.",
+      alt: "Montáž příhradových vazníků zastřešení vstupu do domu, pohled zespodu proti obloze, 2017–2023.",
     },
     photos: [
       {
         src: vaznikyNebe,
-        alt: "Příhradové vazníky na betonovém věnci, mezi nimi prosvítá obloha.",
+        alt: "Příhradové vazníky zastřešení vstupu do domu na betonovém věnci, 2017–2023.",
       },
       {
         src: vaznikJerab,
-        alt: "Hydraulická ruka zvedá světlý příhradový vazník nad stavbu.",
+        alt: "Hydraulická ruka zvedá příhradový vazník při zastřešení vstupu do domu, 2017–2023.",
       },
       {
         src: podkrovi,
-        alt: "Hotové podkroví: vazníky, záklopy a řada střešních oken.",
+        alt: "Příhradové vazníky, záklopy a střešní okna u zastřešení vstupu do domu, 2017–2023.",
       },
     ],
   },
@@ -416,11 +420,11 @@ export const historie: Obdobi[] = [
     id: "dnes",
     label: "Dnes",
     title: "Vazníky, krovy a pergoly",
-    text: "Dnes vyrábíme v Ivanovicích na Hané. Na snímcích je montáž příhradových vazníků z let 2017 až 2023 a pergola z 9. září 2025.",
+    text: "Vyrábíme v Ivanovicích na Hané. Na snímcích je montáž příhradových vazníků zastřešení vstupu do domu, 2017–2023. Pergola je z 9. září 2025.",
     photos: [
       {
         src: vaznikyNebe,
-        alt: "Současná montáž příhradových vazníků proti obloze, album z let 2017 až 2023.",
+        alt: "Montáž příhradových vazníků zastřešení vstupu do domu, 2017–2023. Výroba je v Ivanovicích na Hané.",
       },
       {
         src: pergola,
