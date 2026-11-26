@@ -49,13 +49,13 @@ export const chybiRozmer = "Doplní firma";
 
 export const hero: Foto = {
   src: krovNebe,
-  alt: "Klasický krov ze světlého dřeva proti modré obloze, pohled zespodu do vazby a kleštin.",
+  alt: "Klasický věšadlový krov ve Slavkově u Brna z roku 2014, pohled zespodu do vazby a kleštin.",
 };
 
 export const sluzby = {
   konstrukce: {
     src: krovCelek,
-    alt: "Sedlový klasický krov ze světlého dřeva, uprostřed ocelová spojka, v pozadí stromy.",
+    alt: "Sedlový věšadlový krov ve Slavkově u Brna z roku 2014, uprostřed ocelová spojka.",
   },
   pokryvacstvi: {
     src: bobrovkaDetail,
@@ -85,7 +85,7 @@ export const stranky: Record<string, Foto[]> = {
   "strechy/krovy": [
     {
       src: krovNebe,
-      alt: "Detail klasického krovu ze světlého dřeva proti obloze.",
+      alt: "Detail věšadlového krovu ve Slavkově u Brna z roku 2014, světlé dřevo proti obloze.",
     },
     {
       src: krovBsh,
@@ -163,27 +163,29 @@ export const realizace: Realizace[] = [
   },
   {
     slug: "klasicky-krov-2008-2023",
-    title: "Klasický krov proti obloze, 2008–2023",
-    year: "2008–2023",
+    title: "Klasický věšadlový krov, Slavkov u Brna",
+    year: "2014",
     kind: "Klasický krov",
-    lead: "Pohledy do klasického krovu z alba zakázek mezi lety 2008 a 2023. Přesný rok jednotlivých snímků v podkladech není.",
+    lead: "Klasický věšadlový krov ve Slavkově u Brna z roku 2014.",
+    obec: "Slavkov u Brna",
+    rozmer: null,
     featured: true,
     cover: {
       src: krovNebeSirsi,
-      alt: "Klasický krov z hranolů proti obloze, dole cihlový štít.",
+      alt: "Klasický věšadlový krov ve Slavkově u Brna z roku 2014, hranoly proti obloze a cihlový štít.",
     },
     photos: [
       {
         src: krovNebe,
-        alt: "Hustá vazba klasického krovu ze světlého dřeva proti modré obloze.",
+        alt: "Věšadlový krov ve Slavkově u Brna, 2014, hustá vazba ze světlého dřeva proti obloze.",
       },
       {
         src: krovNebeSirsi,
-        alt: "Krokve, kleštiny a ocelová spojka klasického krovu, v pozadí zdivo.",
+        alt: "Krokve, kleštiny a ocelová spojka věšadlového krovu ve Slavkově u Brna, 2014.",
       },
       {
         src: krovCelek,
-        alt: "Celý sedlový krov od pozednice po hřeben, za ním borovice.",
+        alt: "Sedlový věšadlový krov ve Slavkově u Brna z roku 2014, od pozednice po hřeben.",
       },
     ],
   },
@@ -401,6 +403,22 @@ export const historie: Obdobi[] = [
       {
         src: pavilon,
         alt: "Pavilon Vincentinum z lepeného dřeva ve Šternberku, sloupy a šikmé vzpěry, prosinec 2011 až duben 2012.",
+      },
+    ],
+  },
+  {
+    id: "slavkov-2014",
+    label: "2014",
+    title: "Klasický věšadlový krov, Slavkov u Brna",
+    text: "Klasický věšadlový krov ve Slavkově u Brna z roku 2014.",
+    photos: [
+      {
+        src: krovNebe,
+        alt: "Věšadlový krov ve Slavkově u Brna z roku 2014, pohled zespodu do vazby.",
+      },
+      {
+        src: krovCelek,
+        alt: "Sedlový věšadlový krov ve Slavkově u Brna, 2014.",
       },
     ],
   },

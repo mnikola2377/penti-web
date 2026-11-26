@@ -16,7 +16,7 @@ const { item, sizes = "(min-width: 900px) 340px, 100vw" } = Astro.props;
     <h3>{item.title}</h3>
     <p class="missing">
       {item.vyroba ? `Výroba: ${item.vyroba}.` : `Obec: ${item.obec ?? chybiObec}.`}
-      {item.rozmer === null ? "" : ` Rozměr: ${item.rozmer ?? chybiRozmer}.`}
+      {item.rozmer ? ` Rozměr: ${item.rozmer}.` : item.obec || item.vyroba ? "" : ` Rozměr: ${chybiRozmer}.`}
     </p>
     <span class="more">Otevřít realizaci</span>
   </div>

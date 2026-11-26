@@ -30,7 +30,7 @@ const description = item.obec || item.vyroba
         <dd>{item.vyroba ?? item.obec ?? chybiObec}</dd>
       </div>
       {
-        item.rozmer !== null && (
+        (item.rozmer || (!item.obec && !item.vyroba && item.rozmer !== null)) && (
           <div>
             <dt>Rozměr</dt>
             <dd>{item.rozmer ?? chybiRozmer}</dd>
